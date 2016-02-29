@@ -1,0 +1,80 @@
+<div>
+    <form name="vm.data_input_form" role="form" novalidate 
+    ng-submit="vm.submit()">
+        <div class="row clearfix">
+            <h4>Nueva Matricula</h4>
+            <br>
+            <div class="col-md-12 column well">
+                <div class="row">
+                    <div class="col-md-4 column">
+                        <label>Nombre de la Materia</label>
+                        <select
+                                class="form-control"
+                                ng-model="vm.valorMateria"
+                                ng-options="materia.Nombre for materia in vm.materias"
+                                >
+                            <option value="">{{materia.Nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 column">
+                        <label for="codigo">Codigo de la Materia</label>
+                        <input type="text" class="form-control" 
+                        name="codigo" readonly="readonly" 
+                        ng-model="vm.valorMateria.Codigo"/>
+                    </div>
+                    <div class="col-md-4 column">
+                        <label for="semestre">Semestre</label>
+                        <input type="text" class="form-control" 
+                        name="semestre" 
+                        ng-model="vm.matricula.Semestre" required/>
+                        <div class="error" ng-show="vm.submitted && 
+                        vm.data_input_form.semestre.$invalid">
+                            <small class="error" 
+                            ng-show="vm.data_input_form.semestre.$error.required">
+                                El Semestre es obligatorio.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix"><div class="col-md-12 column"><br><br></div></div>
+                <div class="row">
+                    <div class="col-md-4 column">
+                        <label for="seccion">Sección</label>
+                        <input type="text" class="form-control" 
+                        name="seccion" ng-model="vm.matricula.Nombre" 
+                        required/>
+                        <div class="error" ng-show="vm.submitted && 
+                        vm.data_input_form.seccion.$invalid">
+                            <small class="error" 
+                            ng-show="vm.data_input_form.seccion.$error.required">
+                               La sección es obligatoria.
+                            </small>
+                        </div>
+                    </div>
+                     <div class="col-md-4 column"><br>
+                        <span class="input-group-btn">
+                            <button type="button"class="btn-warning btn" 
+                            ng-click="vm.cargarEstudiantes()">
+                            Cargar Estudiantes
+                            </button>
+                        </span>
+                    </div>
+                <div class="row clearfix"><div class="col-md-12 column"><br>
+                    <br></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-2 column">
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <p class="input-group">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn-primary btn">Crear Matricula</button>
+                    </span>
+                    </p>
+                </div>
+            </div>
+        </div> 
+    </form>
+</div>

@@ -1,0 +1,22 @@
+{
+  "name": "masa-front",
+  "version": "1.0.0",
+  "description": "Frontend for M.A.S.A. App.",
+  "main": "app/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:PosmaGroup/censys-front.git"
+  },
+  "author": "Posma Group C.A.",
+  "license": "MIT",
+  "devDependencies": {
+    "karma": "^0.13.9"
+  },
+  "dependencies": {
+    "express" : "latest",
+    "gulp":"latest"
+  }
+}

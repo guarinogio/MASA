@@ -1,0 +1,13 @@
+(function(){
+    'use strict';
+
+    angular
+        .module('app.course')
+        .factory('courses', courses)
+        .value('id',{});
+
+    courses.$inject = ['$resource','$rootScope'];
+    function courses($resource, $rootScope){
+         return $resource('http://'+$rootScope.domainUrl+'/courses/:id', null);
+    };
+})();

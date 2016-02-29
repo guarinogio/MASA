@@ -1,0 +1,82 @@
+<div>
+    <form name="vm.data_input_form" role="form" novalidate 
+    ng-submit="vm.submit()">
+        <div class="row clearfix">
+            <h4>Datos de la Materia</h4>
+            <br>
+            <div class="col-md-12 column well">
+                <div class="row">
+                    <div class="col-md-6 column">
+                        <label for="Codigo">Código de la Materia</label>
+                        <input type="numeric" class="form-control" 
+                        name="Codigo" ng-model="vm.materia.Codigo"
+                        ng-pattern="/\d{4}/" maxlength="4" required/>
+                        <div class="error" ng-show="vm.submitted && 
+                        vm.data_input_form.Codigo.$invalid">
+                            <small class="error" 
+                            ng-show="vm.data_input_form.Codigo.$error.required">
+                                El Código de la Materia es Obligatorio.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 column">
+                        <label for="Nombre">Nombre de la Materia</label>
+                        <input type="text" class="form-control" 
+                        name="Nombre" ng-model="vm.materia.Nombre" required/>
+                        <div class="error" ng-show="vm.submitted && 
+                        vm.data_input_form.Nombre.$invalid">
+                            <small class="error" 
+                            ng-show="vm.data_input_form.Nombre.$error.required">
+                                El Nombre de la Materia es Obligatorio.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix"><div class="col-md-12 column"><br>
+                    <br></div></div>
+                <div class="row">
+                    <div class="col-md-6 column">
+                       <label for="Creditos">Cantidad de Creditos</label>
+                        <input type="numeric" class="form-control" 
+                        name="Creditos" ng-model="vm.materia.Creditos"
+                        maxlength="1" placeholder="5" required/>
+                        <div class="error" ng-show="vm.submitted && 
+                        vm.data_input_form.Creditos.$invalid">
+                            <small class="error" 
+                            ng-show="vm.data_input_form.Creditos.$error.required">
+                                La Cantidad de Creditos es Obligatoria.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-6 column">
+                        <label for="Description">Descripción</label>
+                        <input type="text" class="form-control" 
+                        name="Description" ng-model="vm.materia.Description"
+                        required/>
+                        <div class="error" ng-show="vm.submitted && 
+                        vm.data_input_form.Description.$invalid">
+                            <small class="error" 
+                            ng-show="vm.data_input_form.Description.$error.required">
+                                Por favor, inserte una breve descripción.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix"><div class="col-md-12 column"><br><br></div></div>
+            </div> 
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-2 column">
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <p class="input-group">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn-primary btn">
+                            Crear Materia</button>
+                    </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,21 @@
+<div class="col-sm-3 col-md-2 sidebar">
+    <ul class="nav nav-sidebar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar" data-ng-controller="sidebarCtrl as vm">
+                    <ul class="nav nav-sidebar">
+                        <li ng-repeat="item in items" ng-click="showChilds(item)">
+                            <a>{{item.text}}</a>
+                            <ul class="nav nav-sidebar text-center">
+                                <li ng-repeat="subItem in item.subItems" ng-show="item.active" >
+                                    <a data-ui-sref="{{ subItem.state ? subItem.state : false }}">{{subItem.text}}
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </ul>
+</div>
+

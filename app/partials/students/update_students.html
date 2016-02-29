@@ -1,0 +1,69 @@
+<div class="row clearfix">
+    <div class="col-md-12 column">
+    </div>
+</div>
+<form  name="vm.data_input_form" role="form" novalidate ng-submit="vm.submit()">  
+    <div class="row clearfix">
+        <h4>Modificar Estudiante</h4>
+        <br>
+        <div class="col-md-12 column well">
+            <div class="row">
+                <div class="col-md-4 column">
+                    <label for="cedula">Cedula</label>
+                    <input type="nmumeric" class="form-control" 
+                    name="cedula" readonly="readonly" 
+                    ng-model="vm.estudiante.Cedula"  />
+                </div>
+                <div class="col-md-4 column">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control"
+                    name="nombre" readonly="readonly" 
+                    ng-model="vm.estudiante.Nombre"  />
+                </div>
+                <div class="col-md-4 column">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" class="form-control" 
+                    name="apellido" readonly="readonly" 
+                    ng-model="vm.estudiante.Apellido"  />
+                </div>
+            </div>
+            <div class="row clearfix"><div class="col-md-12 column"><br><br>
+            </div></div>
+            <div class="row">
+                <div class="col-md-4 column">
+                    <label for="email">Direccion de Correo Electronico</label>
+                    <input type="email" class="form-control" 
+                    name="email" ng-model="vm.estudiante.Correo" 
+                    ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" placeholder="me@example.com"/>
+                    <small class="error" 
+                    ng-show="vm.data_input_form.correo.$error.pattern">
+                        El formato del Correo del Alumno es incorrecto.
+                    </small>
+                </div>
+                <div class="col-md-4 column">
+                    <label for="telefono">Numero de Telefono</label>
+                    <input type="phone" class="form-control" 
+                    name="telefono" ng-model="vm.estudiante.Telefono" 
+                    ng-pattern="/\d{4}-\d{3}-\d{4}/" maxlength="13" 
+                    placeholder="0212-574-1234"/>
+                        <small class="error" 
+                        ng-show="vm.data_input_form.telefono.$error.pattern">
+                            El formato del Teléfono debe ser: 0212-789-5551.
+                        </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-2 column">
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <p class="input-group">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn-primary btn">Modificar Estudiante</button>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</form>

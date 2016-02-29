@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h3 class="modal-title">Eliminar Profesor</h3>
+</div>
+<div style="text-align: center" class="modal-body">
+    {{ mensaje }}
+</div>
+<div  class="modal-footer">
+	<button class="btn btn-primary" ng-show="acceptButton" type="button" 
+	ng-click="ok(urlLo)">Aceptar</button>
+    <button class="btn btn-primary" ng-show="botonOK"  type="button" 
+    ng-click="vm.eliminarProfesor(index)">OK</button>
+    <button class="btn btn-warning" ng-show="botonCancelar" type="button" 
+    ng-click="cancel()">Cancel</button>
+</div>

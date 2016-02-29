@@ -1,0 +1,109 @@
+<html lang="en" ng-app="app"> 
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="favicon.ico">
+
+        <title>Modulo de Administración de Asistencia</title>
+
+        <!-- Bootstrap CSS -->
+        <!-- ======================-->
+        <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+        <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
+        <link href="css/nested.css" type="text/css" rel="stylesheet" />
+        <link href="css/demo-framework.css" type="text/css" rel="stylesheet"/>
+        <link href="css/search-box-example.css" type="text/css" rel="stylesheet" >
+        <link href="bower_components/angular-chart.js/dist/angular-chart.css" rel="stylesheet"> 
+        
+        <!-- Custom styles for this template -->
+        <!-- ====================================-->
+        <link href="css/style.css" rel="stylesheet"> 
+        
+    </head>
+
+    <body>
+        <div ui-view name="navbar"></div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ui-view name="content"></div>
+                <div ui-view name="sidebar"></div>
+            </div>
+        </div>
+
+        <!-- Thirdpary JavaScript and modules. -->
+        <!-- ================================================== -->
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-base64/angular-base64.js"></script>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/ng-scrollbar/dist/ng-scrollbar.min.js"></script>
+        <link rel="stylesheet" href="bower_components/ng-scrollbar/dist/ng-scrollbar.min.css" >
+
+        <script src="bower_components/ng-scrollable/min/ng-scrollable.min.js"></script>
+        <link rel="stylesheet" href="bower_components/ng-scrollable/min/ng-scrollable.min.css" >
+        
+        <script src="bower_components/lodash/lodash.min.js" type="text/javascript"></script>
+        <script src="bower_components/angular-simple-logger/dist/index.js"></script>
+        <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+        
+        <script src="bower_components/crypto-js/crypto-js.js"></script>
+        <script src="bower_components/crypto-js/md5.js"></script>
+        <script src="bower_components/crypto-js/sha1.js"></script>
+        <script src="bower_components/crypto-js/sha256.js"></script>
+        <script src="bower_components/crypto-js/sha512.js"></script>
+        <script src="bower_components/crypto-js/enc-base64.js"></script>
+        <script src="bower_components/base64/base64.js"></script>
+
+        <!-- Application Javascript -->
+        <!-- ====================================================-->
+        <script src="js/app.js"></script>
+
+        <script src="js/course/course.module.js"></script>
+        <script src="js/course/course.controllers.js"></script>
+        <script src="js/course/course.services.js"></script>
+        
+        <script src="js/login/login.module.js"></script>
+        <script src="js/login/login.controllers.js"></script>
+        <script src="js/login/login.services.js"></script>
+
+        <script src="js/professor/professor.module.js"></script>
+        <script src="js/professor/professor.controllers.js"></script>
+        <script src="js/professor/professor.services.js"></script>
+        
+        <script src="js/report/report.module.js"></script>
+        <script src="js/report/report.controllers.js"></script>
+        <script src="js/report/report.services.js"></script>
+        
+        <script src="js/section/section.module.js"></script>
+        <script src="js/section/section.controllers.js"></script>
+        <script src="js/section/section.services.js"></script>
+
+        <script src="js/sidebar/sidebar.controllers.js"></script>
+        
+        <script src="js/student/student.module.js"></script>
+        <script src="js/student/student.controllers.js"></script>
+        <script src="js/student/student.services.js"></script>
+        
+        <!-- Angular ui.bootstrap's Javascript instead of Bootstrap Javascript -->
+        <!-- ==================================================== -->
+        <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="bower_components/Chart.js/Chart.min.js"></script>
+        <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+        
+        
+        <script>
+            var loadFile = function(event) {
+              var output = document.getElementById('output');
+              output.src = URL.createObjectURL(event.target.files[0]);
+            };
+        </script>
+    </body>
+</html>

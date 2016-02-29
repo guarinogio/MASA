@@ -1,0 +1,65 @@
+<form name="vm.data_input_form" role="form" novalidate ng-submit="vm.submit()">  
+    <div class="row clearfix">
+        <div class="col-md-10 column well">
+            <h4 style="text-align: center">Ingrese sus Datos</h4>
+            <div class="row" >
+                <div class="col-md-4 column">
+                </div>
+                <div class="col-md-4 column">
+                    <label for="nickname">Nombre de Usuario</label>
+                    <input type="text" class="form-control" id="nickname" name="nickname" ng-model="vm.user.Nickname"  required/>
+                    <div class="error" ng-show="vm.submitted && vm.data_input_form.nickname.$invalid">
+                        <small class="error" ng-show="vm.data_input_form.nickname.$error.required">
+                            {{'TAG_NICK_NAME_ERROR'}}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix"><div class="col-md-12 column"><br><br></div></div>
+            <div class="row">
+                <div class="col-md-4 column">
+                </div>
+                <div class="col-md-4 column">
+                    <label for="password">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" ng-model="vm.user.Password" maxlength="8" required/>
+                    <div ng-show=false> {{ vm.password = vm.user.Password }}</div>
+                    <div class="error" ng-show="vm.submitted && vm.data_input_form.password.$invalid">
+                        <small class="error" ng-show="vm.data_input_form.password.$error.required">
+                            {{'TAG_PASSWORD_ERROR'}}
+                        </small>
+                    </div>
+                    <div ng-show=false>{{getHash(vm.password)}}</div>
+                </div>
+            </div>
+        </div> <!-- end column -->
+    </div> <!-- end row -->
+
+    <div class="row clearfix">
+        <div class="col-md-2 column">
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <p class="input-group">
+                <span class="input-group-btn">
+                    <button type="submit" id="submit" class="btn-primary btn" >Ingresar</button>
+                </span>
+                </p>
+
+            </div>
+        </div>
+    </div> <!-- end row -->
+    <script type="text/ng-template" id="myModalContentLogin.html">
+            <div  class="modal-header">
+                <h3 class="modal-title">Censys</h3>
+            </div>
+            <div style="text-align: center" class="modal-body">
+                <div  ng-show="loadingLogin" style="text-align: center" class="loading"><img src="img/login-loading.gif"></div>
+                {{ mensaje }} 
+                <div ng-show=false> {{ index }}</div>
+            </div>
+            <div  class="modal-footer">
+                <div ng-show=false > {{ okLogin(actOk, urlLo) }}</div>
+                <button class="btn btn-warning" ng-show="bcancel" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+</form>
+

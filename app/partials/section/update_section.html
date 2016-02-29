@@ -1,0 +1,54 @@
+<div class="row clearfix">
+    <h4>Estudiantes Inscritos en {{ vm.matricula.Nombre }} - Seccion {{ vm.matricula.Seccion }} - Semestre {{ vm.matricula.Semestre }}</h4>
+    <br>
+    <div>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th width="20%">
+                    <a href="" ng-click="sortType = 'Cedula'; sortReverse = !sortReverse">
+                        Cedula
+                        <span ng-show="sortType == 'Cedula' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'Cedula' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </th>
+                <th width="20%">
+                    <a href="" ng-click="sortType = 'Nombre'; sortReverse = !sortReverse">
+                        Nombre
+                        <span ng-show="sortType == 'Nombre' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'Nombre' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </th>
+                <th width="20%">
+                    <a href="" ng-click="sortType = 'Apellido'; sortReverse = !sortReverse">
+                        Apellido
+                        <span ng-show="sortType == 'Apellido' && !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'Apellido' && sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </th>
+                <th width="20%" style="text-align: center">
+                    <a>Retirar</a>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="estudiante in vm.listaEstudiantes | orderBy:sortType:sortReverse | filter:searchUser">
+                <td style="vertical-align:middle">{{ estudiante.Cedula }}</td>
+                <td style="vertical-align:middle">{{ estudiante.Nombre }}</td>
+                <td style="vertical-align:middle">{{ estudiante.Apellido }}</td>
+                <td style="text-align: center">
+                    <span title="Click aqui para Eliminar un Estudiante" 
+                    class="glyphicon glyphicon-remove" aria-hidden="true" 
+                    ng-click="vm.retirarEstudianteModal($index)" 
+                    style="cursor:pointer;"></span>
+                </td>         
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <button type="button" class="btn-primary btn"  ng-click="vm.actualizarMatricula()">Guardar Cambios</button>
+    <div ng-show = false> {{ vm.retirarEstudianteSplice(index, rsplice) }}</div>
+    <div class="container-fluid ">
+        <a href="#listarMatricula" class="btn-warning btn" style=" margin: 10px">Regresar</a>
+    </div>
+</div>

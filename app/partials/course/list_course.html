@@ -1,0 +1,70 @@
+<div class="row clearfix">
+    <h4>Lista de Materias</h4>
+    <div class="row clearfix"><div class="col-md-12 column"><br><br></div>
+</div>
+    <div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th width="10%">
+                        <a href="" ng-click="sortType = 'Codigo'; 
+                        sortReverse = !sortReverse">
+                            Código
+                            <span ng-show="sortType == 'Codigo' && 
+                            !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'Codigo' && 
+                            sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th width="20%">
+                        <a href="" ng-click="sortType = 'Nombre'; 
+                        sortReverse = !sortReverse">
+                            Nombre
+                            <span ng-show="sortType == 'Nombre' && 
+                            !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'Nombre' && 
+                            sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th width="10%">
+                        <a href="" 
+                        ng-click="sortType = 'Creditos'; 
+                        sortReverse = !sortReverse">
+                            Creditos
+                            <span ng-show="sortType == 'Creditos' &&
+                            !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'Creditos' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th width="50%" style="text-align: center">
+                        <a href="">
+                            Descripción  
+                        </a>
+                    </th>
+                    <th width="10%" style="text-align: center">
+                        <a>Eliminar</a>
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="materia in vm.listaMateria | orderBy:sortType:sortReverse | filter:searchUser">
+                    <td style="vertical-align:middle">{{ materia.Codigo }}</td>
+                    <td style="vertical-align:middle">{{ materia.Nombre }}</td>
+                    <td style="vertical-align:middle">{{ materia.Creditos }}</td>
+                    <td style="vertical-align:middle">{{ materia.Descripcion }}</td>
+                    <td style="text-align: center">
+                        <span 
+                        title="Click aqui para Eliminar la Materia" 
+                        class="glyphicon glyphicon-remove" 
+                        aria-hidden="true" 
+                        ng-click="vm.eliminarMateriaModal($index)" 
+                        style="cursor:pointer"></span>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-show=false > {{ vm.eliminarMateriaSplice(index, rsplice) }}</div>
+</div>
