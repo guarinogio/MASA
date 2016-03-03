@@ -25,11 +25,11 @@
                 vm.matricula = successResult;
                 angular.forEach(vm.matricula, function (value){
                     matriculaArray.push({
-                        Nombre:value.Nombre,
-                        Codigo:value.Codigo,
-                        Materia:value.Materia,
-                        Semestre:value.Semestre,
-                        Estudiantes: value.Estudiantes
+                        section:value.section,
+                        code:value.code,
+                        course:value.course,
+                        semester:value.semester,
+                        student: value.student
                     });
                 });
                 $rootScope.loading = false;
@@ -59,7 +59,7 @@
             
             $scope.modalInstance = $modal.open({
                 animation: $rootScope.animationsEnabled,
-                templateUrl: 'partials/matricula/modal/eliminar_matricula_modal.html',
+                templateUrl: 'partials/section/modal/delete_section_modal.html',
                 scope: $scope,
                 size: 'sm',
                 resolve: {
@@ -159,7 +159,7 @@
 
                 $scope.modalInstance = $modal.open({
                     animation: $rootScope.animationsEnabled,
-                    templateUrl: 'partials/matricula/modal/crear_matricula_modal.html',
+                    templateUrl: 'partials/section/modal/create_section_modal.html',
                     scope: $scope,
                     size: 'sm',
                     resolve: {
@@ -244,7 +244,7 @@
 
             $scope.modalInstance = $modal.open({
                 animation: $rootScope.animationsEnabled,
-                templateUrl: 'partials/matricula/modal/actualizar_matricula_modal.html',
+                templateUrl: 'partials/section/modal/update_section_modal.html',
                 scope: $scope,
                 size: 'sm',
                 resolve: {
