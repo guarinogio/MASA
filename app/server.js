@@ -81,7 +81,7 @@ app.post('/courses', function(req, res){
 	})
 });
 
-app.delete('courses/:id', function(req, res){
+app.delete('/courses/:id', function(req, res){
 	console.log("Received delete request...");
 	db.Courses.remove(
 		{_id: new mongojs.ObjectId(req.params.id)}, function(err, docs){

@@ -6,31 +6,22 @@
         .controller('listarMateriaCtrl',listarMateriaCtrl)
         .controller('crearMateriaCtrl', crearMateriaCtrl)
 
+
+
     listarMateriaCtrl.$inject = 
     ['$scope', '$rootScope', '$location', 'courses', '$modal'];
     function listarMateriaCtrl($scope, $rootScope, $location, courses, $modal) {
         var vm = this;
-        $rootScope.table = false;
+        var array = [];
 
-        var materiaArreglo = [];
         courses.query( 
-                function(data){
-                    vm.materia = data;
-                    angular.forEach(vm.materia, function (value){
-                        materiaArreglo.push({ 
-                            Codigo:value.Codigo,
-                            Nombre:value.Nombre,
-                            Creditos:value.Creditos,
-                            Descripcion:value.Descripcion
-                        });
-                    });
-                    $rootScope.table = true;
-                    vm.listaMateria = materiaArreglo;
-                }, 
-                function(data){
-                    console.log("Error al obtener los datos.");
+            function (successResult){
+                vm.course = successResult;
+            }, 
+            function (){
+                console.log("Error al obtener los datos.");
 
-                });
+            });
                 
         vm.eliminarMateriaModal = function (index) {
             $rootScope.index = index;
@@ -38,7 +29,6 @@
             $rootScope.otroBotonOk = false;
             $rootScope.botonCancelar = true;
             $rootScope.rsplice = false;
-            $rootScope.loading = false;
             $rootScope.mensaje = "¿Seguro que desea eliminar la materia?";
 
             $scope.modalInstance = $modal.open({
@@ -56,27 +46,25 @@
         };
         
         vm.eliminarMateria = function (index) {
-            $rootScope.loadingListarForm = true;
             $rootScope.botonOk = false;
             $rootScope.otroBotonOk = true;
             $rootScope.botonCancelar = false;
             $rootScope.urlLo = 'listarMateria';
-            $rootScope.rsplice = true;
+            var name = vm.course[index].name;
             
-            courses.delete({ id: vm.materia[index]._id }, 
-                function() {
-                    $rootScope.loadingListarForm = false;
-                    $rootScope.mensaje = "Materia eliminada";
+            courses.delete({ id: vm.course[index]._id }, 
+                function () {
+                    $rootScope.rsplice = true;
+                    $rootScope.mensaje = "Materia " + name + " eliminada";
                 },
-                function() {
-                    $rootScope.loadingListarForm = false;
-                    $rootScope.mensaje = "Error eliminado materia";
+                function () {
+                    $rootScope.mensaje = "Error eliminando la materia" + name;
                 });   
         };
 
         vm.eliminarMateriaSplice = function(index, rsplice) {
             if(rsplice){
-                vm.listaMateria.splice(index, 1);
+                vm.course.splice(index, 1);
                 $rootScope.rsplice = false;
             }
         };
@@ -116,11 +104,10 @@
 
             if (vm.data_input_form.$valid){
                 vm.course = {
-
-                    "Codigo": vm.materia.Codigo,
-                    "Nombre": vm.materia.Nombre,
-                    "Creditos": vm.materia.Creditos,
-                    "Descripcion" : vm.materia.Description,
+                    "code": vm.course.code,
+                    "name": vm.course.name,
+                    "credits": vm.course.credits,
+                    "description" : vm.course.description,
                 };
 
                 $scope.modalInstance = $modal.open({
@@ -141,13 +128,13 @@
                         $rootScope.botonOk = true;
                         $rootScope.urlLo = 'listarMateria';
                         $rootScope.mensaje = 
-                        "Materia " + vm.materia.Nombre + " creada";
+                        "Materia " + vm.course.name + " creada";
                     },
                     function(){
                         $rootScope.botonOk = true;
                         $rootScope.urlLo = 'listarMateria';
                         $rootScope.mensaje = 
-                        "Error creando la materia " + vm.materia.Nombre;
+                        "Error creando la materia " + vm.course.name;
                     });
             }else{
 

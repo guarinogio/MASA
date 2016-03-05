@@ -7,19 +7,19 @@
             <div class="col-md-12 column well">
                 <div class="row">
                     <div class="col-md-6 column">
-                        <label for="Codigo">Código de la Materia</label>
+                        <label for="code">Código de la Materia</label>
                         <input type="numeric" class="form-control" 
-                        name="Codigo" ng-model="vm.materia.Codigo" 
+                        name="code" ng-model="vm.course.code" 
                         readonly="readonly"/>
                     </div>
                     <div class="col-md-6 column">
-                        <label for="Nombre">Nombre de la Materia</label>
+                        <label for="name">Nombre de la Materia</label>
                         <input type="text" class="form-control" 
-                        name="Nombre" ng-model="vm.materia.Nombre" required/>
+                        name="name" ng-model="vm.course.name" required/>
                         <div class="error" ng-show="vm.submitted && 
-                        vm.data_input_form.Nombre.$invalid">
+                        vm.data_input_form.name.$invalid">
                             <small class="error" 
-                            ng-show="vm.data_input_form.Nombre.$error.required">
+                            ng-show="vm.data_input_form.name.$error.required">
                                 El Nombre de la Materia es Obligatorio.
                             </small>
                         </div>
@@ -28,27 +28,14 @@
                 <div class="row clearfix"><div class="col-md-12 column"><br><br></div></div>
                 <div class="row">
                     <div class="col-md-6 column">
-                       <label for="Creditos">Cantidad de Creditos</label>
+                       <label for="credits">Cantidad de Creditos</label>
                         <input type="numeric" class="form-control"
-                        name="Creditos" ng-model="vm.materia.Creditos" maxlength="1" placeholder="5" required/>
+                        name="credits" ng-model="vm.course.credits" maxlength="1" placeholder="5" required/>
                         <div class="error" ng-show="vm.submitted && 
-                        vm.data_input_form.Creditos.$invalid">
+                        vm.data_input_form.credits.$invalid">
                             <small class="error"
-                            ng-show="vm.data_input_form.Creditos.$error.required">
+                            ng-show="vm.data_input_form.credits.$error.required">
                                 La Cantidad de Creditos es Obligatoria.
-                            </small>
-                        </div>
-                    </div>
-                    <div class="col-md-6 column">
-                        <label for="Semestre">Semestre</label>
-                        <input type="text" class="form-control" 
-                        name="Semestre" ng-model="vm.materia.Semestre" 
-                        required/>
-                        <div class="error" ng-show="vm.submitted && 
-                        vm.data_input_form.Semestre.$invalid">
-                            <small class="error" 
-                            ng-show="vm.data_input_form.Semestre.$error.required">
-                                El Semestre es Obligatorio.
                             </small>
                         </div>
                     </div>

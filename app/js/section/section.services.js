@@ -4,7 +4,6 @@
     angular
         .module('app.section')
         .factory('sections', sections)
-        .factory('courses', courses)
         .value('matriculaSeleccionada',{});
 
     sections.$inject = ['$resource','$rootScope'];
@@ -14,10 +13,4 @@
                 'update': {method:'PUT'}
             });
     };
-        
-    courses.$inject = ['$resource','$rootScope'];
-    function courses($resource, $rootScope){
-        return $resource('http://'+$rootScope.domainUrl+'/courses');
-    };
-
 })();

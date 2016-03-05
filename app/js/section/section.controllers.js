@@ -11,17 +11,10 @@
     function listarMatriculaCtrl ( $scope, $rootScope, $location, sections, $modal, matriculaSeleccionada ){
         
         var vm = this;
-        vm.lista = true;
-        $rootScope.actOk = false;
-        $rootScope.loading = true;
-        $rootScope.table = false;
-
-        vm.submit = function() {
-        }
-
         var matriculaArray = [];
+
         sections.query(
-            function(successResult){
+            function (successResult){
                 vm.matricula = successResult;
                 angular.forEach(vm.matricula, function (value){
                     matriculaArray.push({
@@ -32,11 +25,9 @@
                         student: value.student
                     });
                 });
-                $rootScope.loading = false;
-                $rootScope.table = true;
                 vm.listaMatricula = matriculaArray;
             },
-            function(data){
+            function (){
                 console.log("Error al obtener los datos.");
 
             });
@@ -47,19 +38,18 @@
         confirmar su decision llama automaticamente a la funcion que hara la 
         llamada a servicio que borrara la matricula de la base de datos.
         */
+
         vm.eliminarMatriculaModal = function (index) {
-            
             $rootScope.index = index;   
             $rootScope.botonOk = true;
             $rootScope.otroBotonOk = false;
             $rootScope.botonCancelar = true;
             $rootScope.rsplice = false;
-            $rootScope.eliminarLoading = false;
-            $rootScope.mensaje = "¿Seguro que desea eliminar la matricula?";
+            $rootScope.mensaje = "¿Seguro que desea eliminar la sección?";
             
             $scope.modalInstance = $modal.open({
                 animation: $rootScope.animationsEnabled,
-                templateUrl: 'partials/section/modal/delete_section_modal.html',
+                templateUrl: '/partials/section/modal/delete_section_modal.html',
                 scope: $scope,
                 size: 'sm',
                 resolve: {
@@ -70,24 +60,20 @@
             });
         };
 
-        vm.eliminarMatricula= function (index) {
+        vm.eliminarMatricula = function (index) {
             $rootScope.botonOk = false;
             $rootScope.otroBotonOk = true;
             $rootScope.botonCancelar = false;
             $rootScope.urlLo = 'listarMatricula';
-            $rootScope.eliminarLoading = true;
-            var name = vm.matricula[index].Nombre;
+            var name = vm.matricula[index].section;
 
             sections.delete({ id: vm.matricula[index]._id }, 
-                function (successResult) {
-                    $rootScope.eliminarLoading = false;
+                function () {
                     $rootScope.rsplice = true;
-                    $rootScope.mensaje = "Sección " + name + " eliminada.";
+                    $rootScope.mensaje = "Sección " + name + " eliminada";
                 },
-                function (errorResult) {
-                    $rootScope.eliminarLoading = false;
-                    $rootScope.mensaje = "Error al eliminar la sección " + name; 
-                    console.log('Could not delete from server');
+                function () {
+                    $rootScope.mensaje = "Error eliminando la sección " + name;
                 });
         };
 
@@ -185,6 +171,36 @@
             }
         };
 
+        var xlf = document.getElementById('xlf');
+        function handleFile(e) {
+            console.log("DO SOME STUFF");
+            /*rABS = document.getElementsByName("userabs")[0].checked;
+            use_worker = document.getElementsByName("useworker")[0].checked;
+            var files = e.target.files;
+            var f = files[0];
+            {
+                var reader = new FileReader();
+                var name = f.name;
+                reader.onload = function(e) {
+                    if(typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
+                    var data = e.target.result;
+                    if(use_worker) {
+                        xw(data, process_wb);
+                    } else {
+                        var wb;
+                        if(rABS) {
+                            wb = X.read(data, {type: 'binary'});
+                        } else {
+                        var arr = fixdata(data);
+                            wb = X.read(btoa(arr), {type: 'base64'});
+                        }
+                        process_wb(wb);
+                    }
+                };
+                if(rABS) reader.readAsBinaryString(f);
+                else reader.readAsArrayBuffer(f);
+            }*/
+        }
         vm.cargarEstudiantes = function () {
 
         };

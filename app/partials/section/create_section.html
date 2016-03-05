@@ -11,16 +11,16 @@
                         <select
                                 class="form-control"
                                 ng-model="vm.valorMateria"
-                                ng-options="materia.Nombre for materia in vm.materias"
+                                ng-options="materia.name for materia in vm.materias"
                                 >
-                            <option value="">{{materia.Nombre}}</option>
+                            <option value="">{{materia.name}}</option>
                         </select>
                     </div>
                     <div class="col-md-4 column">
                         <label for="codigo">Codigo de la Materia</label>
                         <input type="text" class="form-control" 
                         name="codigo" readonly="readonly" 
-                        ng-model="vm.valorMateria.Codigo"/>
+                        ng-model="vm.valorMateria.code"/>
                     </div>
                     <div class="col-md-4 column">
                         <label for="semestre">Semestre</label>
@@ -52,11 +52,8 @@
                         </div>
                     </div>
                      <div class="col-md-4 column"><br>
-                        <span class="input-group-btn">
-                            <button type="button"class="btn-warning btn" 
-                            ng-click="vm.cargarEstudiantes()">
-                            Cargar Estudiantes
-                            </button>
+                        <label for="seccion">Cargar Estudiantes</label>
+                            <input type="file" name="xlfile" id="xlf"/></input>
                         </span>
                     </div>
                 <div class="row clearfix"><div class="col-md-12 column"><br>
