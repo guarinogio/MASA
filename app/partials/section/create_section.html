@@ -20,13 +20,13 @@
                         <label for="codigo">Codigo de la Materia</label>
                         <input type="text" class="form-control" 
                         name="codigo" readonly="readonly" 
-                        ng-model="vm.valorMateria.code"/>
+                        ng-model="vm.valorMateria.code" required/>
                     </div>
                     <div class="col-md-4 column">
                         <label for="semestre">Semestre</label>
                         <input type="text" class="form-control" 
-                        name="semestre" 
-                        ng-model="vm.matricula.Semestre" required/>
+                        name="semestre" readonly="readonly" 
+                        ng-model="vm.semester" required/>
                         <div class="error" ng-show="vm.submitted && 
                         vm.data_input_form.semestre.$invalid">
                             <small class="error" 
@@ -41,7 +41,7 @@
                     <div class="col-md-4 column">
                         <label for="seccion">Sección</label>
                         <input type="text" class="form-control" 
-                        name="seccion" ng-model="vm.matricula.Nombre" 
+                        name="seccion" readonly="readonly" ng-model="vm.name" 
                         required/>
                         <div class="error" ng-show="vm.submitted && 
                         vm.data_input_form.seccion.$invalid">
