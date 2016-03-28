@@ -7,21 +7,25 @@
         .controller('crearMateriaCtrl', crearMateriaCtrl)
 
 
-
     listarMateriaCtrl.$inject = 
-    ['$scope', '$rootScope', '$location', 'courses', '$modal'];
-    function listarMateriaCtrl($scope, $rootScope, $location, courses, $modal) {
+    ['$scope', '$rootScope', '$location', 'professors', '$modal', 'profesorSeleccionado', 'selectedCourse'];
+    function listarMateriaCtrl($scope, $rootScope, $location, professors, $modal, profesorSeleccionado, selectedCourse) {
         var vm = this;
-        var array = [];
+        var professorid = '56f5fd3a20047f3c15b05f0e';
 
-        courses.query( 
+        professors.get({ id: professorid }, 
             function (successResult){
-                vm.course = successResult;
+                vm.professor = successResult;
+                vm.course = vm.professor.courses;
             }, 
             function (){
                 console.log("Error al obtener los datos.");
 
             });
+        vm.listarSecciones = function (index) {
+            selectedCourse._id = vm.course[index]._id;
+            $location.url('listarMatricula');
+        };
                 
         vm.eliminarMateriaModal = function (index) {
             $rootScope.index = index;
@@ -51,10 +55,10 @@
             $rootScope.botonCancelar = false;
             $rootScope.urlLo = 'listarMateria';
             var name = vm.course[index].name;
+            vm.professor.courses.splice(index, 1);
             
-            courses.delete({ id: vm.course[index]._id }, 
+            professors.update({ id: professorid }, vm.professor,
                 function () {
-                    $rootScope.rsplice = true;
                     $rootScope.mensaje = "Materia " + name + " eliminada";
                 },
                 function () {
@@ -62,16 +66,9 @@
                 });   
         };
 
-        vm.eliminarMateriaSplice = function(index, rsplice) {
-            if(rsplice){
-                vm.course.splice(index, 1);
-                $rootScope.rsplice = false;
-            }
-        };
-
-        vm.modificarMateria = function (index) {
+        /*vm.modificarMateria = function (index) {  
             $location.url('modificarMateria');  
-        };
+        };*/
 
         $scope.ok = function (urlLo) {
             $location.url(urlLo);
@@ -92,13 +89,22 @@
     };
     
     crearMateriaCtrl.$inject = 
-    ['$scope','$rootScope', '$modal', '$location', 'courses'];
-    function crearMateriaCtrl($scope, $rootScope, $modal, $location, courses) {
-       
+    ['$scope','$rootScope', '$modal', '$location', 'professors'];
+    function crearMateriaCtrl($scope, $rootScope, $modal, $location, professors) {
         var vm = this;
         vm.submitted = false;
         vm.mayorque = false;
         $rootScope.mensaje = "";
+        var professorid = '56f5fd3a20047f3c15b05f0e';
+
+        professors.get({ id: professorid }, 
+            function (successResult){
+                vm.professor = successResult;
+            }, 
+            function (){
+                console.log("Error al obtener los datos.");
+
+            });
 
         vm.submit = function() {
 
@@ -123,7 +129,8 @@
                     }
                 });
 
-                courses.save(vm.course,
+                vm.professor.courses.push(vm.course);
+                professors.update({ id: professorid }, vm.professor,
                     function(){
                         $rootScope.botonOk = true;
                         $rootScope.urlLo = 'listarMateria';

@@ -2,14 +2,14 @@
     'user strict';
     
     angular.module('app', [
-            'app.course',
-            'app.login',
-            'app.professor',
-            'app.reports',
-            'app.section',
-            'app.student',
-            'ngResource',
-            'ui.router'
+        'app.course',
+        'app.login',
+        'app.professor',
+        'app.reports',
+        'app.section',
+        'app.student',
+        'ngResource',
+        'ui.router'
     ])
 
     .config(function($stateProvider, $urlRouterProvider) {
@@ -21,7 +21,7 @@
                 url: '/login',
                 views: {
                     content: {
-                templateUrl: 'login.html',
+                templateUrl: 'partials/login/login.html',
                 controller: 'loginCtrl',
                 controllerAs: 'vm'
                 }
@@ -32,6 +32,5 @@
     .run(function ($rootScope) {
         $rootScope.domainUrl = 'Localhost:3000';
     });
-
 
 })();

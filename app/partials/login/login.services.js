@@ -4,7 +4,6 @@
     angular
         .module('app.login')
         .factory('Login', Login)
-        .factory('Rol', Rol)
         .factory('GetRol', GetRol)
         .factory('hash', hash)
         .value('algoritmo','SHA-1')
@@ -14,13 +13,7 @@
     
     Login.$inject = ['$resource','$rootScope'];
     function Login($resource, $rootScope){
-        return $resource('http://'+$rootScope.domainUrl+'/api/VerifyUser');
-    
-    };
-    
-    Rol.$inject = ['$resource','$rootScope'];
-    function Rol($resource, $rootScope){
-        return $resource('http://'+$rootScope.domainUrl+'/api/Rol');
+        return $resource('http://'+$rootScope.domainUrl+'/api/VerifyUser');  
     };
 
     GetRol.$inject = ['$resource','$rootScope'];

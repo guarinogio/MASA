@@ -19,8 +19,8 @@
 
         var profesorArray = [];
         professors.query(
-            function(data){
-               vm.profesor = data;
+            function (successResult){
+               vm.profesor = successResult;
                 angular.forEach(vm.profesor, function (value){
                     profesorArray.push({
                         Cedula:value.id,
@@ -132,6 +132,8 @@
                     "lastname": vm.profesor.Apellido,
                     "email": vm.profesor.Correo,
                     "number": vm.profesor.Telefono,
+                    "role": "professor",
+                    "password": vm.profesor.Password
                 };
 
                 $rootScope.botonOk = false;
@@ -197,12 +199,13 @@
         vm.submit = function() {
 
             var professor = {
-                "_id": vm.profesor._id,
                 "id": vm.profesor.Cedula,
                 "name": vm.profesor.Nombre,
                 "lastname": vm.profesor.Apellido,
                 "email": vm.profesor.Correo,
                 "number": vm.profesor.Telefono,
+                "role": "professor",
+                "password": vm.profesor.Password
             };
 
             $rootScope.botonOk = false;
@@ -218,7 +221,7 @@
                 }
             });
 
-            professors.update(professor,
+            professors.update({ id: vm.profesor._id}, professor, 
                 function(){
                     $rootScope.botonOk = true;
                     $rootScope.botonCancelar = false;

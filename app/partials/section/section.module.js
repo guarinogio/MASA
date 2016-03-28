@@ -1,5 +1,4 @@
 (function(){
-
     'use strict';
 
     angular
@@ -23,11 +22,11 @@
                 url: '/listarMatricula',
                 views: {
                     sidebar: {
-                        templateUrl: 'partials/sidebar.html',
+                        templateUrl: 'partials/sidebar/sidebar.html',
                         controller: 'sidebarCtrl'
                     },
                     navbar: {
-                        templateUrl: 'partials/navbar.html'
+                        templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
                         templateUrl: 'partials/section/list_section.html',
@@ -41,11 +40,11 @@
                 url: '/crearMatricula',
                 views: {
                     sidebar: {
-                        templateUrl: 'partials/sidebar.html',
+                        templateUrl: 'partials/sidebar/sidebar.html',
                         controller: 'sidebarCtrl'
                     },
                     navbar: {
-                        templateUrl: 'partials/navbar.html'
+                        templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
                         templateUrl: 'partials/section/create_section.html',
@@ -59,11 +58,11 @@
                 url: '/actualizarMatricula',
                 views: {
                     sidebar: {
-                        templateUrl: 'partials/sidebar.html',
+                        templateUrl: 'partials/sidebar/sidebar.html',
                         controller: 'sidebarCtrl'
                     },
                     navbar: {
-                        templateUrl: 'partials/navbar.html'
+                        templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
                         templateUrl: 'partials/section/update_section.html',

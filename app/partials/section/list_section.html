@@ -1,50 +1,42 @@
 <div class="row clearfix">
     <h4>Listado de Secciones</h4></br>
     <div>
+    <button class="btn-success btn" ng-click="vm.createSection()" style="margin: 10px"> Crear Sección </button>
+    </br>
+    </br>
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
                 <th width="20%">
-                    <a href="" ng-click="sortType = 'name'; 
-                    sortReverse = !sortReverse">
                         Sección
                         <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
-                    </a>
                 </th>
                 <th width="20%">
-                    <a href="" 
-                    ng-click="sortType = 'course'; sortReverse = !sortReverse">
                         Nombre de la Materia
                         <span ng-show="sortType == 'course' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'course' && sortReverse" class="fa fa-caret-up"></span>
-                    </a>
                 </th>
                 <th width="20%">
-                    <a href="" ng-click="sortType = 'code'; sortReverse = !sortReverse">
                         Codigo de la Materia
                         <span ng-show="sortType == 'code' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'code' && sortReverse" class="fa fa-caret-up"></span>
-                    </a>
                 </th>
                 <th width="20%">
-                    <a href="" ng-click="sortType = 'semester'; sortReverse = !sortReverse">
                         Semestre
                         <span ng-show="sortType == 'semester' && !sortReverse" class="fa fa-caret-down"></span>
                         <span ng-show="sortType == 'semester' && sortReverse" class="fa fa-caret-up"></span>
-                    </a>
                 </th>
                 <th width="10%" style="text-align: center">
-                    <a>Modificar</a>
+                    Modificar
                 </th>
                 <th width="10%" style="text-align: center">
-                    <a>Borrar</a>
+                    Borrar
                 </th>
-
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat = "section in vm.section | orderBy:sortType:sortReverse | filter:searchUser">
+            <tr ng-repeat = "section in vm.section">
                 <td style="vertical-align:middle">{{ section.name }}</td>
                 <td style="vertical-align:middle">{{ section.course }}</td>
                 <td style="vertical-align:middle">{{ section.code }}</td>
@@ -65,5 +57,5 @@
             </tbody>
         </table>
     </div>
-    <div ng-show=false > {{ vm.eliminarMatriculaSplice(index, rsplice) }}</div>
+    <a href="#listarMateria" class="btn-warning btn" style=" margin: 10px">Regresar</a>
 </div>

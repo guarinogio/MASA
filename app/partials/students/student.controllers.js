@@ -116,12 +116,24 @@
         return vm;
     };
 
-    crearEstudianteCtrl.$inject = ['$scope','$rootScope', '$location', 'students', '$modal'];
-    function crearEstudianteCtrl($scope, $rootScope, $location, students, $modal){
+    crearEstudianteCtrl.$inject = ['$scope', '$rootScope', '$location', 'professors', '$modal', 'selectedSection', 'selectedCourse'];
+    function crearEstudianteCtrl($scope, $rootScope, $location, professors, $modal, selectedSection, selectedCourse){
         
         var vm = this;
+        var duplicated = false;
+        var professorid = '56f5fd3a20047f3c15b05f0e';
+        vm.professor = {};
         $rootScope.mensaje = "";
         $rootScope.actOk = false;
+
+        professors.get({ id: professorid }, 
+            function (successResult){
+                vm.professor = successResult;
+            }, 
+            function (){
+                console.log("Error al obtener los datos.");
+
+        });
 
         vm.submit = function() {
 
@@ -130,8 +142,7 @@
                     "id": vm.estudiante.Cedula,
                     "name": vm.estudiante.Nombre,
                     "lastname": vm.estudiante.Apellido,
-                    "email": vm.estudiante.Correo,
-                    "number": vm.estudiante.Telefono,
+                    "email": vm.estudiante.Correo
                 };
 
                 $rootScope.crearEstudianteLoading = true;
@@ -148,22 +159,34 @@
                     }
                 });
 
-                students.save(person,
-                    function(){
-                        $rootScope.botonOk = true;
-                        $rootScope.urlLo = 'listarEstudiante';
-                        $rootScope.mensaje = "Estudiante " + vm.estudiante.Apellido + ", " + vm.estudiante.Nombre + " agregado";
-                        $rootScope.crearEstudianteLoading = false;
-                    },
+                angular.forEach (vm.professor.courses[selectedCourse.index].sections[selectedSection.index].students, 
+                    function (value){
+                        if(value.id == vm.estudiante.Cedula) duplicated = true;
+                });
+                if (!duplicated){
+                    vm.professor.courses[selectedCourse.index].sections[selectedSection.index].students.push(person);
 
-                    function(){
-                        $rootScope.botonOk = true;
-                        $rootScope.urlLo = 'listarEstudiante';
-                        $rootScope.mensaje = "Error al agregar al estudiante " + vm.estudiante.Apellido + ", " + vm.estudiante.Nombre;
-                        $rootScope.crearEstudianteLoading = false;
-                    });
+                    professors.update({ id: professorid }, vm.professor,
+                        function(){
+                            $rootScope.botonOk = true;
+                            $rootScope.urlLo = 'actualizarMatricula';
+                            $rootScope.mensaje = "Estudiante " + vm.estudiante.Apellido + ", " + vm.estudiante.Nombre + " agregado";
+                            $rootScope.crearEstudianteLoading = false;
+                        },
+
+                        function(){
+                            $rootScope.botonOk = true;
+                            $rootScope.urlLo = 'actualizarMatricula';
+                            $rootScope.mensaje = "Error al agregar al estudiante " + vm.estudiante.Apellido + ", " + vm.estudiante.Nombre;
+                            $rootScope.crearEstudianteLoading = false;
+                        });
+                } else {
+                    $rootScope.botonOk = true;
+                    $rootScope.urlLo = 'actualizarMatricula';
+                    $rootScope.mensaje = "Estudiante con cedula " + vm.estudiante.Cedula + " ya esta en la lista.";
+                    $rootScope.crearEstudianteLoading = false;
+                }
             }else{
-
                 vm.submitted = true;
             }
         }

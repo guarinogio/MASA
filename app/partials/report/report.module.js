@@ -22,11 +22,11 @@
                 url: '/reportes',
                 views: {
                     sidebar: {
-                      templateUrl: 'partials/sidebar.html',
+                      templateUrl: 'partials/sidebar/sidebar.html',
                       controller: 'sidebarCtrl'
                     },
                     navbar: {
-                      templateUrl: 'partials/navbar.html'
+                      templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
                 templateUrl: 'partials/reportes/reportes.html',

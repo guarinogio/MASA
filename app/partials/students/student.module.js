@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module("app.professor", ['ui.router', 'ui.bootstrap'])
+        .module("app.student", ['ui.router', 'ui.bootstrap'])
         .run(addStateToScope)
         .config(getRoutes);
 
@@ -14,59 +14,59 @@
 
     getRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];
     function getRoutes($stateProvider, $urlRouterProvider){
-        $urlRouterProvider.otherwise('/listarProfesor');
+        $urlRouterProvider.otherwise('/listarEstudiante');
 
         $stateProvider
-            .state('listarProfesor', {
-                url: '/listarProfesor',
+            .state('listarEstudiante', {
+                url: '/listarEstudiante',
                 views: {
                     sidebar: {
-                      templateUrl: 'partials/sidebar.html',
+                      templateUrl: 'partials/sidebar/sidebar.html',
                       controller: 'sidebarCtrl'
 
                     },
                     navbar: {
-                      templateUrl: 'partials/navbar.html'
+                      templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
-                templateUrl: 'partials/professor/list_professor.html',
-                controller: 'listarProfesorCtrl',
+                templateUrl: 'partials/students/list_students.html',
+                controller: 'listarEstudianteCtrl',
                 controllerAs: 'vm'
             }
         }
             })
 
-            .state('crearProfesor', {
-                url: '/crearProfesor',
+            .state('crearEstudiante', {
+                url: '/crearEstudiante',
                 views: {
                     sidebar: {
-                      templateUrl: 'partials/sidebar.html',
+                      templateUrl: 'partials/sidebar/sidebar.html',
                       controller: 'sidebarCtrl'
                     },
                     navbar: {
-                      templateUrl: 'partials/navbar.html'
+                      templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
-                templateUrl: 'partials/professor/create_professor.html',
-                controller: 'crearProfesorCtrl',
+                templateUrl: 'partials/students/create_students.html',
+                controller: 'crearEstudianteCtrl',
                 controllerAs: 'vm' 
             }
         }
             })
             
-            .state('actualizarProfesor', {
-                url: '/actualizarProfesor',
+            .state('actualizarEstudiante', {
+                url: '/actualizarEstudiante',
                 views: {
                     sidebar: {
-                      templateUrl: 'partials/sidebar.html',
+                      templateUrl: 'partials/sidebar/sidebar.html',
                       controller: 'sidebarCtrl'
                     },
                     navbar: {
-                      templateUrl: 'partials/navbar.html'
+                      templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
-                templateUrl: 'partials/professor/update_professor.html',
-                controller: 'actualizarProfesorCtrl',
+                templateUrl: 'partials/students/update_students.html',
+                controller: 'actualizarEstudianteCtrl',
                 controllerAs: 'vm' 
             }
         }

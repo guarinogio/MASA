@@ -7,15 +7,23 @@
         .controller('crearMatriculaCtrl', crearMatriculaCtrl)
         .controller('actualizarMatriculaCtrl', actualizarMatriculaCtrl)
 
-    listarMatriculaCtrl.$inject = [ '$scope', '$rootScope', '$location', 'sections', '$modal', 'matriculaSeleccionada'];
-    function listarMatriculaCtrl ( $scope, $rootScope, $location, sections, $modal, matriculaSeleccionada ){
-        
+    listarMatriculaCtrl.$inject = [ '$scope', '$rootScope', '$location', 'professors', '$modal', 'selectedCourse', 'selectedSection'];
+    function listarMatriculaCtrl ( $scope, $rootScope, $location, professors, $modal, selectedCourse, selectedSection ){
         var vm = this;
-        var matriculaArray = [];
+        var professorid = '56f5fd3a20047f3c15b05f0e';
+        vm.section = [];
+        vm.professor = null;
 
-        sections.query(
+        professors.get({ id: professorid },
             function (successResult){
-                vm.section = successResult;
+                vm.professor = successResult;
+                angular.forEach (vm.professor.courses, 
+                    function (value, key){
+                        if (value._id == selectedCourse._id ) {
+                            vm.index = key;
+                            vm.section = value.sections;
+                        }
+                    }); 
             },
             function (){
                 console.log("Error al obtener los datos.");
@@ -28,6 +36,11 @@
         confirmar su decision llama automaticamente a la funcion que hara la 
         llamada a servicio que borrara la matricula de la base de datos.
         */
+
+        vm.createSection = function () {
+            $location.url('crearMatricula');
+        };
+
 
         vm.eliminarMatriculaModal = function (index) {
             $rootScope.index = index;   
@@ -57,7 +70,8 @@
             $rootScope.urlLo = 'listarMatricula';
             var name = vm.section[index].name;
 
-            sections.delete({ id: vm.section[index]._id }, 
+            vm.professor.courses[vm.index].sections.splice(index, 1);
+            professors.update({ id: professorid }, vm.professor, 
                 function () {
                     $rootScope.rsplice = true;
                     $rootScope.mensaje = "Sección " + name + " eliminada";
@@ -69,28 +83,21 @@
 
         vm.eliminarMatriculaSplice = function (index, rsplice) {
             if(rsplice){
-                vm.section.splice(index, 1);
-                $rootScope.rsplice = false;
+                
             }
         };
 
-        /*************************Fin de Eliminar Matricula********************/
-
+        /*************************Fin de Eliminar Matricula*******************/
 
         vm.modificarMatricula = function (index) {
-            matriculaSeleccionada._id = vm.section[index]._id;
-            matriculaSeleccionada.name = vm.section[index].name;
-            matriculaSeleccionada.code = vm.section[index].code;
-            matriculaSeleccionada.course = vm.section[index].course; 
-            matriculaSeleccionada.semester = vm.section[index].semester;
-            matriculaSeleccionada.students = vm.section[index].students;
+            selectedSection._id = vm.section[index]._id;
+            selectedCourse.index = vm.index;
             $location.url('actualizarMatricula');
         };
 
         $rootScope.open = function($event) {
             $event.preventDefault();
             $event.stopPropagation();
-
             $rootScope.opened = true;
         };
 
@@ -107,30 +114,43 @@
     };
 
     crearMatriculaCtrl.$inject = 
-    ['$scope','$rootScope', '$location', 'sections', '$modal', 'courses'];
-    function crearMatriculaCtrl($scope, $rootScope, $location, sections, $modal, courses){
-        
+    ['$scope','$rootScope', '$location', 'professors', '$modal', 'selectedCourse'];
+    function crearMatriculaCtrl($scope, $rootScope, $location, professors, $modal, selectedCourse){
+        var professorid = '56f5fd3a20047f3c15b05f0e';
         var vm = this;
+        vm.course = {};
+        vm.selectedCourse = selectedCourse;
         vm.submitted = false;
         vm.semester, vm.section, vm.materias;
         $rootScope.mensaje = "";
         vm.students = [];
 
-        courses.query(
-            function (successResult) {
-                vm.materias = successResult;
+        professors.get({ id: professorid },
+            function (successResult){
+                vm.professor = successResult;
+                angular.forEach (vm.professor.courses, 
+                    function (value, key){
+                        if (value._id == vm.selectedCourse._id ) {
+                            vm.index = key;
+                            vm.section = value.sections;
+                            vm.course.code = value.code;
+                            vm.course.name = value.name;
+                        }   
+                    }); 
             },
-            function () {
-                vm.materias = null;
-            }); 
+            function (){
+                console.log("Error al obtener los datos.");
+
+            });
+
 
         vm.submit = function () {
 
             if (vm.data_input_form.$valid){
                 vm.package = {
                     "name": vm.name,
-                    "code": vm.valorMateria.code,
-                    "course": vm.valorMateria.name,
+                    "code": vm.course.code,
+                    "course": vm.course.name,
                     "semester": vm.semester,
                     "students": vm.students
                 };
@@ -147,7 +167,8 @@
                     }
                 });
 
-                sections.save(vm.package,
+                vm.professor.courses[vm.index].sections.push(vm.package);
+                 professors.update({ id: professorid }, vm.professor,
                     function(){
                         $rootScope.botonOk = true;
                         $rootScope.urlLo = 'listarMatricula';
@@ -180,7 +201,7 @@
                     /* Find desired cell containing semester and section */
                     vm.semester = worksheet['B5'].v;
                     vm.name = worksheet['B9'].v;
-                    $scope.$apply();
+                    //$scope.$apply();
 
                     for (z in worksheet) {
                         /* all keys that do not begin with "!" correspond to cell addresses */
@@ -189,8 +210,9 @@
                             /* Cells that start in the C column represent the sttudent id in the worksheet, the same applies to name and lastname being in D and E columns*/
                             if (z[0] =='C') student.id = worksheet[z].v;
                             if (z[0] =='D') student.name = worksheet[z].v;
-                            if (z[0] =='E') {
-                                student.lastname = worksheet[z].v;    
+                            if (z[0] =='E') student.lastname = worksheet[z].v;
+                            if (z[0] =='F') {
+                                student.email = worksheet[z].v;    
                                 /*Since we are only going to use these 3 attributes from the students then we push only this data to the students array*/
                                 vm.students.push(student);
                                 student = {};
@@ -198,6 +220,7 @@
                              
                         } 
                     };
+                    $scope.$apply();
                 };
                 reader.readAsBinaryString(f);
             }
@@ -219,26 +242,38 @@
         return vm;
     };
 
-    actualizarMatriculaCtrl.$inject = ['$scope', '$rootScope', '$location', 'sections', '$modal', 'matriculaSeleccionada'];
-    function actualizarMatriculaCtrl($scope, $rootScope, $location, sections, $modal, matriculaSeleccionada){
-        
+    actualizarMatriculaCtrl.$inject = ['$scope', '$rootScope', '$location', 'professors', '$modal', 'selectedSection', 'selectedCourse'];
+    function actualizarMatriculaCtrl($scope, $rootScope, $location, professors, $modal, selectedSection, selectedCourse){
+        var professorid = '56f5fd3a20047f3c15b05f0e';
         var vm = this;
-        vm.section = matriculaSeleccionada;
-        vm.students = matriculaSeleccionada.students;
+        vm.section = {};
+        vm.students = [];
 
+        professors.get({ id: professorid },
+            function (successResult){
+                vm.professor = successResult;
+                angular.forEach (vm.professor.courses[selectedCourse.index].sections, 
+                    function (value, key){
+                        if (value._id == selectedSection._id ) {
+                            selectedSection.index = key;
+                            vm.students = value.students;
+                            vm.section = value; 
+                        }   
+                    }); 
+            },
+            function (){
+                console.log("Error al obtener los datos.");
+            });
 
-        vm.actualizarMatricula = function() {
-            
-        }
+        vm.addStudent = function (index) {
+            $location.url('crearEstudiante');
+        };
 
         vm.retirarEstudianteModal = function (index) {
             $rootScope.index = index;
-            
             $rootScope.botonOk = true;
             $rootScope.otroBotonOk = false;
             $rootScope.botonCancelar = true;
-
-            $rootScope.rsplice = false;
             $rootScope.eliminarLoading = false;
             $rootScope.mensaje = "¿Desea retirar al estudiante "+ vm.students[index].lastname +", "+ vm.students[index].name + "?";
 
@@ -256,37 +291,21 @@
         };
 
         vm.retirarEstudiante = function (index) {
-            $rootScope.rsplice = true;
-        };
+            vm.professor.courses[selectedCourse.index].sections[selectedSection.index].students.splice(index, 1);
 
-        vm.retirarEstudianteSplice = function(index, rsplice) {
-            if (rsplice) {
-                vm.students.splice(index, 1);
-                $rootScope.rsplice = false;
-
-                vm.section = {
-                    "_id": vm.section._id,
-                    "name": vm.section.name,
-                    "code": vm.section.code,
-                    "course": vm.section.name,
-                    "semester": vm.section.semester,
-                    "students": vm.students
-                };
-
-                sections.update(vm.section,
-                function (){
-                    $rootScope.botonOk = false;
-                    $rootScope.otroBotonOk = true;
-                    $rootScope.botonCancelar = false;
-                    $rootScope.mensaje = "Sección "+ vm.section.name +" actualizada";
-                },
-                function (){
-                    $rootScope.botonOk = false;
-                    $rootScope.otroBotonOk = true;
-                    $rootScope.botonCancelar = false;
-                    $rootScope.mensaje = "Error al actualizar la Sección "+ vm.section.name;
-                });
-            }
+            professors.update({ id: professorid }, vm.professor,
+            function (){
+                $rootScope.botonOk = false;
+                $rootScope.otroBotonOk = true;
+                $rootScope.botonCancelar = false;
+                $rootScope.mensaje = "Sección "+ vm.section.name +" actualizada";
+            },
+            function (){
+                $rootScope.botonOk = false;
+                $rootScope.otroBotonOk = true;
+                $rootScope.botonCancelar = false;
+                $rootScope.mensaje = "Error al actualizar la Sección "+ vm.section.name;
+            });
         };
 
         $rootScope.open = function($event) {

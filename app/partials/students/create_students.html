@@ -46,7 +46,7 @@
                     <br><br></div></div>
                 <div class="row">
                     <div class="col-md-4 column">
-                        <label for="correo">Direccion de Correo</label>
+                        <label for="correo">Dirección de Correo</label>
                         <input type="correo" class="form-control" 
                         name="correo" ng-model="vm.estudiante.Correo" 
                         ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" placeholder="me@example.com" required/>
@@ -62,17 +62,6 @@
                             </small>
                         </div>
                     </div>
-                    <div class="col-md-4 column">
-                        <label for="telefono">Numero de Telefono</label>
-                        <input type="telefono" class="form-control" 
-                        name="telefono" ng-model="vm.estudiante.Telefono" 
-                        ng-pattern="/\d{4}-\d{3}-\d{4}/" maxlength="13" 
-                        placeholder="0424-123-9876"/>
-                        <small class="error" 
-                        ng-show="vm.data_input_form.telefono.$error.pattern">
-                            El Formato del Numero de Telefono es incorrecto.
-                        </small>
-                    </div>
                 </div>
             </div>
         </div>
@@ -83,11 +72,12 @@
                     <p class="input-group">
                     <span class="input-group-btn">
                         <button type="submit" class="btn-primary btn">
-                            Agregar Alumno</button>
+                            Agregar Alumno </button>
                     </span>
                     </p>
                 </div>
             </div>
         </div> 
     </form>
+    <a href="#actualizarMatricula" class="btn-warning btn" style=" margin: 10px">Regresar</a>
 </div>

@@ -21,11 +21,11 @@
                 url: '/listarMateria',
                 views: {
                     sidebar: {
-                      templateUrl: 'partials/sidebar.html',
+                      templateUrl: 'partials/sidebar/sidebar.html',
                       controller: 'sidebarCtrl'
                     },
                     navbar: {
-                      templateUrl: 'partials/navbar.html'
+                      templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
                 templateUrl: 'partials/course/list_course.html',
@@ -39,11 +39,11 @@
                 url: '/crearMateria',
                 views: {
                     sidebar: {
-                      templateUrl: 'partials/sidebar.html',
+                      templateUrl: 'partials/sidebar/sidebar.html',
                       controller: 'sidebarCtrl'
                     },
                     navbar: {
-                      templateUrl: 'partials/navbar.html'
+                      templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
                 templateUrl: 'partials/course/create_course.html',

@@ -2,25 +2,21 @@
     <form name="vm.data_input_form" role="form" novalidate 
     ng-submit="vm.submit()">
         <div class="row clearfix">
-            <h4>Nueva Matricula</h4>
+            <h4>Nueva Sección</h4>
             <br>
             <div class="col-md-12 column well">
                 <div class="row">
                     <div class="col-md-4 column">
                         <label>Nombre de la Materia</label>
-                        <select
-                                class="form-control"
-                                ng-model="vm.valorMateria"
-                                ng-options="materia.name for materia in vm.materias"
-                                >
-                            <option value="">{{materia.name}}</option>
-                        </select>
+                         <input type="text" class="form-control" 
+                        name="materia" readonly="readonly" 
+                        ng-model="vm.course.name" required/>
                     </div>
                     <div class="col-md-4 column">
                         <label for="codigo">Codigo de la Materia</label>
                         <input type="text" class="form-control" 
                         name="codigo" readonly="readonly" 
-                        ng-model="vm.valorMateria.code" required/>
+                        ng-model="vm.course.code" required/>
                     </div>
                     <div class="col-md-4 column">
                         <label for="semestre">Semestre</label>
@@ -72,6 +68,49 @@
                     </p>
                 </div>
             </div>
-        </div> 
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th width="20%">
+                    <a href="" ng-click="sortType = 'Cedula'; 
+                    sortReverse = !sortReverse">
+                        Cedula
+                        <span ng-show="sortType == 'Cedula' && 
+                        !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'Cedula' && 
+                        sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </th>
+                <th width="40%">
+                    <a href="" ng-click="sortType = 'Apellido'; 
+                    sortReverse = !sortReverse">
+                        Apellido
+                        <span ng-show="sortType == 'Apellido' && 
+                        !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'Apellido' && 
+                        sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </th>
+                <th width="40%">
+                    <a href="" ng-click="sortType = 'Nombre'; 
+                    sortReverse = !sortReverse">
+                        Nombre
+                        <span ng-show="sortType == 'Nombre' && 
+                        !sortReverse" class="fa fa-caret-down"></span>
+                        <span ng-show="sortType == 'Nombre' && 
+                        sortReverse" class="fa fa-caret-up"></span>
+                    </a>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="student in vm.students">
+                <td style="vertical-align:middle">{{ student.id }}</td>
+                <td style="vertical-align:middle">{{ student.lastname }}</td>
+                <td style="vertical-align:middle">{{ student.name }}</td>
+            </tr>
+            </tbody>
+        </table> 
     </form>
 </div>

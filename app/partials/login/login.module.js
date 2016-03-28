@@ -1,5 +1,4 @@
 (function(){
-
     'use strict';
 
     angular
@@ -16,19 +15,16 @@
     getRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];
     function getRoutes($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise('/');
-
         $stateProvider
             .state('root', {
                 url: '',
                 views: {
                     content: {
-                        templateUrl: 'login.html',
-                        controller: 'LoginCtrl',
+                        templateUrl: 'partials/login/login.html',
+                        controller: 'loginCtrl',
                         controllerAs: 'vm'
                     }
                 }
             })
-            
-            
     };
 })();

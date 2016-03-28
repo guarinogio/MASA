@@ -4,6 +4,8 @@
     angular
         .module('app.professor')
         .factory('professors', professors)
+        .value('selectedCourse',{})
+        .value('selectedSection',{})
         .value('profesorSeleccionado',{});
 
     professors.$inject = ['$resource','$rootScope'];
