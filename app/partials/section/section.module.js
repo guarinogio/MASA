@@ -14,59 +14,59 @@
 
     getRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];
     function getRoutes($stateProvider, $urlRouterProvider){
-        $urlRouterProvider.otherwise('/listarMatricula');
+        $urlRouterProvider.otherwise('/SectionList');
 
         $stateProvider
 
-            .state('listarMatricula', {
-                url: '/listarMatricula',
+            .state('SectionList', {
+                url: '/SectionList',
                 views: {
                     sidebar: {
                         templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'sidebarCtrl'
+                        controller: 'SidebarCtrl'
                     },
                     navbar: {
                         templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
-                        templateUrl: 'partials/section/list_section.html',
-                        controller: 'listarMatriculaCtrl',
+                        templateUrl: 'partials/section/section_list.html',
+                        controller: 'SectionListCtrl',
                         controllerAs: 'vm'
                     }
                 }
             })
 
-            .state('crearMatricula', {
-                url: '/crearMatricula',
+            .state('SectionCreate', {
+                url: '/SectionCreate',
                 views: {
                     sidebar: {
                         templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'sidebarCtrl'
+                        controller: 'SidebarCtrl'
                     },
                     navbar: {
                         templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
-                        templateUrl: 'partials/section/create_section.html',
-                        controller: 'crearMatriculaCtrl',
+                        templateUrl: 'partials/section/section_create.html',
+                        controller: 'SectionCreateCtrl',
                         controllerAs: 'vm'
                     }
                 }
             })
 
-             .state('actualizarMatricula', {
-                url: '/actualizarMatricula',
+             .state('SectionUpdate', {
+                url: '/SectionUpdate',
                 views: {
                     sidebar: {
                         templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'sidebarCtrl'
+                        controller: 'SidebarCtrl'
                     },
                     navbar: {
                         templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
-                        templateUrl: 'partials/section/update_section.html',
-                        controller: 'actualizarMatriculaCtrl',
+                        templateUrl: 'partials/section/section_update.html',
+                        controller: 'SectionUpdateCtrl',
                         controllerAs: 'vm'
                     }
                 }

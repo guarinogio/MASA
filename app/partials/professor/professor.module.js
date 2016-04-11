@@ -14,62 +14,62 @@
 
     getRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];
     function getRoutes($stateProvider, $urlRouterProvider){
-        $urlRouterProvider.otherwise('/listarProfesor');
+        $urlRouterProvider.otherwise('/ProfessorList');
 
         $stateProvider
-            .state('listarProfesor', {
-                url: '/listarProfesor',
+            .state('ProfessorList', {
+                url: '/ProfessorList',
                 views: {
                     sidebar: {
-                      templateUrl: 'partials/sidebar/sidebar.html',
-                      controller: 'sidebarCtrl'
+                        templateUrl: 'partials/sidebar/sidebar.html',
+                        controller: 'SidebarCtrl'
 
                     },
                     navbar: {
-                      templateUrl: 'partials/sidebar/navbar.html'
+                        templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
-                templateUrl: 'partials/professor/list_professor.html',
-                controller: 'listarProfesorCtrl',
-                controllerAs: 'vm'
-            }
-        }
+                        templateUrl: 'partials/professor/professor_list.html',
+                        controller: 'ProfessorListCtrl',
+                        controllerAs: 'vm'
+                    }
+                }
             })
 
-            .state('crearProfesor', {
-                url: '/crearProfesor',
+            .state('ProfessorCreate', {
+                url: '/ProfessorCreate',
                 views: {
                     sidebar: {
-                      templateUrl: 'partials/sidebar/sidebar.html',
-                      controller: 'sidebarCtrl'
+                        templateUrl: 'partials/sidebar/sidebar.html',
+                        controller: 'SidebarCtrl'
                     },
                     navbar: {
-                      templateUrl: 'partials/sidebar/navbar.html'
+                        templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
-                templateUrl: 'partials/professor/create_professor.html',
-                controller: 'crearProfesorCtrl',
-                controllerAs: 'vm' 
-            }
-        }
+                        templateUrl: 'partials/professor/professor_create.html',
+                        controller: 'ProfessorCreateCtrl',
+                        controllerAs: 'vm' 
+                    }
+                }
             })
             
-            .state('actualizarProfesor', {
-                url: '/actualizarProfesor',
+            .state('ProfessorUpdate', {
+                url: '/ProfessorUpdate',
                 views: {
                     sidebar: {
                       templateUrl: 'partials/sidebar/sidebar.html',
-                      controller: 'sidebarCtrl'
+                      controller: 'SidebarCtrl'
                     },
                     navbar: {
                       templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
-                templateUrl: 'partials/professor/update_professor.html',
-                controller: 'actualizarProfesorCtrl',
-                controllerAs: 'vm' 
-            }
-        }
+                        templateUrl: 'partials/professor/professor_update.html',
+                        controller: 'ProfessorUpdateCtrl',
+                        controllerAs: 'vm' 
+                    }
+                }
             })
     };
 })();

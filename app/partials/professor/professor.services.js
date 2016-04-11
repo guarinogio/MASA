@@ -6,6 +6,7 @@
         .factory('professors', professors)
         .value('selectedCourse',{})
         .value('selectedSection',{})
+        .value('selectedStudent',{})
         .value('profesorSeleccionado',{});
 
     professors.$inject = ['$resource','$rootScope'];

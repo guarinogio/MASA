@@ -5,23 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="favicon.ico">
-
         <title>Modulo de Administración de Asistencia</title>
 
-        <!-- Bootstrap CSS -->
+        <!-- CSS -->
         <!-- ======================-->
         <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
         <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
-        <link href="css/nested.css" type="text/css" rel="stylesheet" />
-        <link href="css/demo-framework.css" type="text/css" rel="stylesheet"/>
-        <link href="css/search-box-example.css" type="text/css" rel="stylesheet" >
         <link href="bower_components/angular-chart.js/dist/angular-chart.css" rel="stylesheet"> 
-        
-        <!-- Custom styles for this template -->
-        <!-- ====================================-->
-        <link href="css/style.css" rel="stylesheet"> 
-        
+        <link href="static/css/style.css" rel="stylesheet"> 
     </head>
 
     <body>
@@ -63,9 +54,11 @@
         <!-- Application Javascript -->
         <!-- ====================================================-->
         <script src="app.js"></script>
+        <script src="partials/sidebar/sidebar.controllers.js"></script>
 
         <script src="partials/course/course.module.js"></script>
-        <script src="partials/course/course.controllers.js"></script>
+        <script src="partials/course/course_create.controller.js"></script>
+        <script src="partials/course/course_list.controller.js"></script>
         <script src="partials/course/course.services.js"></script>
         
         <script src="partials/login/login.module.js"></script>
@@ -73,21 +66,29 @@
         <script src="partials/login/login.services.js"></script>
 
         <script src="partials/professor/professor.module.js"></script>
-        <script src="partials/professor/professor.controllers.js"></script>
+        <script src="partials/professor/professor_create.controller.js"></script>
+        <script src="partials/professor/professor_list.controller.js"></script>
+        <script src="partials/professor/professor_update.controller.js"></script>
         <script src="partials/professor/professor.services.js"></script>
         
         <script src="partials/report/report.module.js"></script>
-        <script src="partials/report/report.controllers.js"></script>
+        <script src="partials/report/course_report.controller.js"></script>
+        <script src="partials/report/section_report.controller.js"></script>
+        <script src="partials/report/student_report.controller.js"></script>
+
+        <script src="partials/report/course_assist.controller.js"></script>
+        <script src="partials/report/section_assist.controller.js"></script>
+        <script src="partials/report/student_assist.controller.js"></script>
         <script src="partials/report/report.services.js"></script>
         
         <script src="partials/section/section.module.js"></script>
-        <script src="partials/section/section.controllers.js"></script>
+        <script src="partials/section/section_create.controller.js"></script>
+        <script src="partials/section/section_list.controller.js"></script>
+        <script src="partials/section/section_update.controller.js"></script>
         <script src="partials/section/section.services.js"></script>
 
-        <script src="partials/sidebar/sidebar.controllers.js"></script>
-        
         <script src="partials/students/student.module.js"></script>
-        <script src="partials/students/student.controllers.js"></script>
+        <script src="partials/students/student_create.controller.js"></script>
         <script src="partials/students/student.services.js"></script>
         
         <!-- Angular ui.bootstrap's Javascript instead of Bootstrap Javascript -->

@@ -1,0 +1,42 @@
+<div class="row clearfix col-md-6">
+    <h4>Asistencia - {{vm.student.lastname}}, {{vm.student.name}}</h4>
+    <br>
+    </br>
+    <div class= "row clearfix col-md-6">  
+        <div> Estadisticas </div>
+        <div ng-style="vm.percentage < 75   && {'color': 'red'} || vm.percentage >76 && {'color': 'green'}"> Porcentaje de Asistencia: {{vm.percentage}} % </div>
+        <div> Total de Dias de Clase: {{vm.lectures}} </div>
+        <div> Total de Asistencias: {{vm.positive}} </div>
+        <div> Total de Inasistencias: {{vm.negative}} </div>
+        <br>  
+    </div>
+    
+    <div>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th width="20%" style="text-align: center">
+                    Dia
+                </th>
+                <th width="20%" style="text-align: center">
+                    Asistencia
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="assistance in vm.assistances">
+                    <td style="vertical-align:middle">{{ assistance.day }}</td>
+                    <td ng-style="assistance.assistance === false && {'color': 'red'} || assistance.assistance === true && {'color': 'green'}"
+                    style="vertical-align:middle">{{ assistance.assistance }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button class = "btn-warning btn" 
+    type = "button" 
+    style = "margin: 10px"
+    ng-click = "vm.back()">
+        Regresar
+    </button>
+</div>

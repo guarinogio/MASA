@@ -3,11 +3,10 @@
 
     angular
         .module('app')
-        .controller('sidebarCtrl', sidebarCtrl)
+        .controller('SidebarCtrl', SidebarCtrl)
 
-    sidebarCtrl.$inject = ['$scope'];
-    function sidebarCtrl($scope) {
-           
+    SidebarCtrl.$inject = ['$scope'];
+    function SidebarCtrl($scope) {   
         var that = this;
         $scope.showChilds = function(item){
             item.active = !item.active;
@@ -15,53 +14,38 @@
 
         $scope.items = [
             {
-            
-              text: 'Modulo de Administración', 
+                text: 'Modulo de Administración', 
                 subItems: [
                     {
-                        state: 'listarProfesor',
+                        state: 'ProfessorList',
                         text: 'Listar Profesores'
                     },
                     {
-                        state: 'crearProfesor',
+                        state: 'ProfessorCreate',
                         text: 'Agregar Profesores'
                   }
                 ]
             },
             {
-            
-              text: 'Modulo de Materias', 
+                text: 'Modulo de Materias', 
                 subItems: [
                     {
-                        state: 'listarMateria',
+                        state: 'CourseList',
                         text: 'Listar Materias'
                     },
                     {
-                        state: 'crearMateria',
+                        state: 'CourseCreate',
                         text: 'Agregar Materia'
                   }
                 ]
             },                
             {
-            
-              text: 'Modulo de Reportes', 
+                text: 'Modulo de Reportes', 
                 subItems: [
                     {
-                        state: 'reportesAlumno',
-                        text: 'Reportes por Alumno'
-                    },
-                    {
-                        state: 'reportesClase',
-                        text: 'Reportes por Clase'
-                    },
-                    {
-                        state: 'reportesSeccion',
-                        text: 'Reportes por Seccion'
-                    },
-                    {
-                        state: 'reportesMateria',
-                        text: 'Reportes por Materia'
-                    }
+                        state: 'courseReport',
+                        text: 'Reportes'
+                    }     
                 ]
             }
         ];

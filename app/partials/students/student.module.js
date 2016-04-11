@@ -14,62 +14,25 @@
 
     getRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];
     function getRoutes($stateProvider, $urlRouterProvider){
-        $urlRouterProvider.otherwise('/listarEstudiante');
+        $urlRouterProvider.otherwise('/StudentCreate');
 
         $stateProvider
-            .state('listarEstudiante', {
-                url: '/listarEstudiante',
+            .state('StudentCreate', {
+                url: '/StudentCreate',
                 views: {
                     sidebar: {
-                      templateUrl: 'partials/sidebar/sidebar.html',
-                      controller: 'sidebarCtrl'
-
+                        templateUrl: 'partials/sidebar/sidebar.html',
+                        controller: 'SidebarCtrl'
                     },
                     navbar: {
-                      templateUrl: 'partials/sidebar/navbar.html'
+                        templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
-                templateUrl: 'partials/students/list_students.html',
-                controller: 'listarEstudianteCtrl',
-                controllerAs: 'vm'
-            }
-        }
-            })
-
-            .state('crearEstudiante', {
-                url: '/crearEstudiante',
-                views: {
-                    sidebar: {
-                      templateUrl: 'partials/sidebar/sidebar.html',
-                      controller: 'sidebarCtrl'
-                    },
-                    navbar: {
-                      templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
-                templateUrl: 'partials/students/create_students.html',
-                controller: 'crearEstudianteCtrl',
-                controllerAs: 'vm' 
-            }
-        }
-            })
-            
-            .state('actualizarEstudiante', {
-                url: '/actualizarEstudiante',
-                views: {
-                    sidebar: {
-                      templateUrl: 'partials/sidebar/sidebar.html',
-                      controller: 'sidebarCtrl'
-                    },
-                    navbar: {
-                      templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
-                templateUrl: 'partials/students/update_students.html',
-                controller: 'actualizarEstudianteCtrl',
-                controllerAs: 'vm' 
-            }
-        }
+                        templateUrl: 'partials/students/student_create.html',
+                        controller: 'StudentCreateCtrl',
+                        controllerAs: 'vm' 
+                    }
+                }
             })
     };
 })();

@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-md-4 column">
                     <label for="nickname">Cedula de Identidad del Profesor</label>
-                    <input type="text" class="form-control" id="nickname" name="nickname" ng-model="vm.user.Nickname"  required/>
+                    <input type="text" class="form-control" id="nickname" name="nickname" ng-model="vm.user.nickname"  required/>
                     <div class="error" ng-show="vm.submitted && vm.data_input_form.nickname.$invalid">
                         <small class="error" ng-show="vm.data_input_form.nickname.$error.required">
                             {{'TAG_NICK_NAME_ERROR'}}
@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-md-4 column">
                     <label for="password">Contraseña</label>
-                    <input type="password" class="form-control" id="password" name="password" ng-model="vm.user.Password" maxlength="8" required/>
+                    <input type="password" class="form-control" id="password" name="password" ng-model="vm.user.password" maxlength="8" required/>
                     <div ng-show=false> {{ vm.password = vm.user.Password }}</div>
                     <div class="error" ng-show="vm.submitted && vm.data_input_form.password.$invalid">
                         <small class="error" ng-show="vm.data_input_form.password.$error.required">

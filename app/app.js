@@ -31,6 +31,7 @@
 
     .run(function ($rootScope) {
         $rootScope.domainUrl = 'Localhost:3000';
+        $rootScope.professorId = '56f5fd3a20047f3c15b05f0e';
     });
 
 })();

@@ -5,22 +5,19 @@
         .module('app.login')
         .controller('loginCtrl', loginCtrl)
 
-    loginCtrl.$inject = ['$rootScope', '$scope', '$location'];
-    function loginCtrl($rootScope, $scope, $location){
-        /*var vm = this;
-        vm.user = user;
-        vm.submitted = false;
-        vm.mayorque = false;
-        $rootScope.items = "";
-        $rootScope.mensaje = "";
+    loginCtrl.$inject = ['$rootScope', '$scope', '$state'];
+    function loginCtrl($rootScope, $scope, $state){
+        var vm = this;
+        vm.user;
+        
         vm.submit = function() {
             if (vm.data_input_form.$valid){
                 vm.pkg = {         
-                    "Nickname": vm.user.Nickname,
-                    "Password": $rootScope.password                         
+                    "Nickname": vm.user.nickname,
+                    "Password": vm.user.password                         
                 }; 
 
-                $rootScope.mensaje = "";
+                /*$rootScope.mensaje = "";
                 $rootScope.bcancel = false;
                 $scope.modalInstance = $modal.open({
                     animation: $rootScope.animationsEnabled,
@@ -28,12 +25,12 @@
                     scope: $scope,
                     size: 'sm',
                     resolve: {
-                      items: function () {
-                        return $rootScope.items;
-                      }
+                        items: function () {
+                            return $rootScope.items;
+                        }
                     }
                 });
-
+                
                 Login.save(vm.pkg, 
                     function(data){ 
                       if(data.Data._value != null){
@@ -58,18 +55,16 @@
                     },
                     function(){
                         
-                });
-                    
-            }else{
-                vm.submitted = true;
+                });*/
+            $state.go('CourseList');
             }
-        }
+        };
 
-        $rootScope.open = function($event) {
+        /*$rootScope.open = function($event) {
             $event.preventDefault();
             $event.stopPropagation();
             $rootScope.opened = true;
-        };
+        };*/
 
         $scope.ok = function (urlLo) {
             $location.url(urlLo);
@@ -78,9 +73,6 @@
        
         $scope.cancel = function () {
             $scope.modalInstance.dismiss('cancel');
-        };
-
-        return vm;  */      
+        };  
     };
-    
 })();

@@ -14,41 +14,41 @@
 
     getRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];
     function getRoutes($stateProvider, $urlRouterProvider){
-        $urlRouterProvider.otherwise('/listarMaterias');
+        $urlRouterProvider.otherwise('/CourseList');
 
         $stateProvider
-           .state('listarMateria', {
-                url: '/listarMateria',
+           .state('CourseList', {
+                url: '/CourseList',
                 views: {
                     sidebar: {
-                      templateUrl: 'partials/sidebar/sidebar.html',
-                      controller: 'sidebarCtrl'
+                        templateUrl: 'partials/sidebar/sidebar.html',
+                        controller: 'SidebarCtrl'
                     },
                     navbar: {
-                      templateUrl: 'partials/sidebar/navbar.html'
+                        templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
-                templateUrl: 'partials/course/list_course.html',
-                controller: 'listarMateriaCtrl',
-                controllerAs: "vm"
+                        templateUrl: 'partials/course/course_list.html',
+                        controller: 'CourseListCtrl',
+                        controllerAs: "vm"
                     }
                 }
             })
             
-            .state('crearMateria', {
-                url: '/crearMateria',
+            .state('CourseCreate', {
+                url: '/CourseCreate',
                 views: {
                     sidebar: {
-                      templateUrl: 'partials/sidebar/sidebar.html',
-                      controller: 'sidebarCtrl'
+                        templateUrl: 'partials/sidebar/sidebar.html',
+                        controller: 'SidebarCtrl'
                     },
                     navbar: {
-                      templateUrl: 'partials/sidebar/navbar.html'
+                        templateUrl: 'partials/sidebar/navbar.html'
                     },
                     content: {
-                templateUrl: 'partials/course/create_course.html',
-                controller: 'crearMateriaCtrl',
-                controllerAs: "vm"
+                        templateUrl: 'partials/course/course_create.html',
+                        controller: 'CourseCreateCtrl',
+                        controllerAs: "vm"
                     }
                 }
             })
