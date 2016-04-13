@@ -30,7 +30,6 @@
 
                 angular.forEach (vm.section.students,
                     function (value){
-                        vm.lectures = value.assistance;
                         angular.forEach (value.assistanceTotal,
                             function (valued){
                                 if (valued.assistance) {
@@ -41,7 +40,7 @@
                         });        
                 });
                 vm.total = vm.positive + vm.negative;
-                vm.percentage = ((vm.positive/vm.total)/vm.lectures)*100; 
+                vm.percentage = (vm.positive/vm.total)*100; 
             },
             function (){
                 console.log("Error al obtener los datos.");
