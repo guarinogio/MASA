@@ -77,24 +77,12 @@
                 });
         };
 
-        vm.eliminarMatriculaSplice = function (index, rsplice) {
-            if(rsplice){
-                
-            }
-        };
-
         /*************************Fin de Eliminar Matricula*******************/
 
         vm.modificarMatricula = function (index) {
             selectedSection._id = vm.section[index]._id;
             selectedCourse.index = vm.index;
             $state.go('SectionUpdate');
-        };
-
-        $rootScope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            $rootScope.opened = true;
         };
 
         $scope.ok = function (urlLo) {
@@ -109,7 +97,5 @@
         vm.back = function () {
             $state.go('CourseList');
         };      
-
-        return vm;
     };
 })();

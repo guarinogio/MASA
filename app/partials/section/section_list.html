@@ -1,7 +1,10 @@
 <div class="row clearfix">
     <h4>Listado de Secciones</h4></br>
     <div>
-    <button class="btn-success btn" ng-click="vm.createSection()" style="margin: 10px"> Crear Sección </button>
+    <span class="input-group-btn">
+        <button class="btn-success btn" ng-click="vm.createSection()" style="margin: 10px"> Crear Sección </button>
+        <button type="button" class="btn-warning btn" style="margin: 10px" ng-click="vm.back()">Regresar</button>
+    </span>
     </br>
     </br>
         <table class="table table-bordered table-striped">
@@ -57,5 +60,4 @@
             </tbody>
         </table>
     </div>
-    <a class="btn-warning btn" style="margin: 10px" ng-click="vm.back()">Regresar</a>
 </div>

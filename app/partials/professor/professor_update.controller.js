@@ -63,11 +63,8 @@
             $scope.modalInstance.dismiss('cancel');
         };
 
-        $rootScope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            $rootScope.opened = true;
-        };
-        return vm;
+        vm.back = function () {
+            $state.go('ProfessorList');
+        };  
     };
 })();

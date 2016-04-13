@@ -68,14 +68,6 @@
 
         $scope.cancel = function () {
             $scope.modalInstance.dismiss('cancel');
-        };
-
-        $rootScope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            $rootScope.opened = true;
-        };
-
-        return vm;        
+        };       
     };
 })();

@@ -129,6 +129,8 @@
             $rootScope.opened = true;
         };
 
-        return vm;
+        vm.back = function () {
+            $state.go('SectionList');
+        };      
     };
 })();
