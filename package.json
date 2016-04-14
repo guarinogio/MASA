@@ -8,15 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:PosmaGroup/censys-front.git"
+    "url": "git@bitbucket.org:rey_reyes/masa.git"
   },
-  "author": "Posma Group C.A.",
+  "author": "Reynaldo Reyes",
   "license": "MIT",
   "devDependencies": {
     "karma": "^0.13.9"
   },
   "dependencies": {
+    "body-parser": "latest",
     "express" : "latest",
-    "gulp":"latest"
+    "gulp":"latest",
+    "mongoose":"latest"
   }
 }
