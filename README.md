@@ -11,7 +11,6 @@ M.A.S.A is an application used to keep track of student assistance through Bluet
 * You need Node.js, NPM, Bower and MongoDB in order to deploy this application.
 
 * First, clone this repository: 
-git clone  https://rey_reyes@bitbucket.org/rey_reyes/masa.git
 * Run "Bower install" and "Npm install" in the root folder fo the app.
 * Run MongoDB, ensure that port 27019 is free.
 * Run Node Server.js
