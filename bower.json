@@ -36,7 +36,8 @@
     "angular-translate-storage-local": "^2.6.1",
     "ng-scrollable": "~0.2.3",
     "ng-scrollbar": "~0.0.8",
-    "angular-chart.js": "~0.8.8"
+    "angular-chart.js": "~0.8.8",
+    "js-xlsx": "^0.8.0"
   },
   "resolutions": {
     "angular": "1.4.0"
