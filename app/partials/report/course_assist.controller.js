@@ -32,6 +32,7 @@
                     function (value){
                         angular.forEach (value.students,
                             function (valued){
+                                vm.lectures = valued.assistance;
                                 angular.forEach (valued.assistanceTotal,
                                     function (valueda){
                                         if (valueda.assistance) {
@@ -41,7 +42,7 @@
                                         }
                                 });        
                         });
-                });
+                }); 
                 vm.total = vm.positive + vm.negative;
                 vm.percentage = (vm.positive/vm.total)*100; 
             },

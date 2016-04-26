@@ -102,7 +102,7 @@
         };
 
         $scope.ok = function (urlLo) {
-            $state.go('ProfessorList');
+            $state.reload();
             $scope.modalInstance.dismiss('cancel');
         };
 

@@ -68,8 +68,8 @@
                         <label for="telefono">Número de Teléfono</label>
                         <input type="telefono" class="form-control" 
                         name="telefono" ng-model="vm.profesor.Telefono" 
-                        ng-pattern="/\d{4}-\d{3}-\d{4}/" maxlength="13"
-                        placeholder="0424-123-9876"/>
+                        ng-pattern="/\d{4}-\d{7}/" maxlength="13"
+                        placeholder="0424-1239876"/>
                         <small class="error" 
                         ng-show="vm.data_input_form.telefono.$error.pattern">
                             El Formato del Número de Teléfono es incorrecto.

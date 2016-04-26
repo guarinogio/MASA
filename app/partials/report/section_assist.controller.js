@@ -30,8 +30,10 @@
 
                 angular.forEach (vm.section.students,
                     function (value){
+                        vm.lectures = value.assistance;
                         angular.forEach (value.assistanceTotal,
                             function (valued){
+
                                 if (valued.assistance) {
                                     vm.positive++;
                                 } else {
