@@ -10,8 +10,7 @@
     </div>
 
     <div ng-show="vm.flag">    
-
-        <h4> Estudiantes con menos de 75% de Asistencia </h4>
+        <h4 style="color: red"> Estudiantes con menos de 75% de Asistencia </h4>
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
@@ -35,6 +34,29 @@
             </tbody>
         </table>
     </div>
+     <h4 style="color: green"> Estudiantes con más 75% de Asistencia </h4>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th width="20%" style="text-align: center">
+                    Cedula
+                </th>
+                <th width="20%" style="text-align: center">
+                    Nombre
+                </th>
+                <th width="20%" style="text-align: center">
+                    Apellido
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="student in vm.studentsPassed">
+                    <td style="vertical-align:middle">{{ student.id }}</td>
+                    <td style="vertical-align:middle">{{ student.name }}</td>
+                    <td style="vertical-align:middle">{{ student.lastname }}</td>
+                </tr>
+            </tbody>
+        </table>
 
     <button class = "btn-warning btn" 
     type = "button" 

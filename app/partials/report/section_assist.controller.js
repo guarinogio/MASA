@@ -16,8 +16,11 @@
         vm.positive = 0;
         vm.professor = null;
         vm.students = [];
+        vm.studentsPassed = [];
         vm.negative = 0;
         vm.flag = false;
+        vm.positiveTotal = 0; 
+        vm.negativeTotal = 0;
 
         professors.get({ id: professorid },
             function (successResult){
@@ -45,9 +48,11 @@
                                 vm.subTotal = vm.positive + vm.negative;
                         });
                         if(((vm.positive/vm.subTotal)*100)<75){
-                             vm.students.push(value);
-                             vm.flag = true;
-                        };
+                            vm.students.push(value);
+                            vm.flag = true;
+                        }else{
+                            vm.studentsPassed.push(value);
+                        } 
                         vm.positiveTotal = vm.positiveTotal + vm.positive; 
                         vm.negativeTotal = vm.negativeTotal + vm.negative;
                         vm.positive = 0;
@@ -55,7 +60,7 @@
                         vm.subTotal = 0;
                 });
                 vm.total = vm.positiveTotal + vm.negativeTotal;
-                vm.percentage = (vm.positive/vm.total)*100; 
+                vm.percentage = (vm.positiveTotal/vm.total)*100; 
             },
             function (){
                 console.log("Error al obtener los datos.");
