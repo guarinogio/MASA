@@ -15,7 +15,9 @@
         vm.percentage = 0;
         vm.positive = 0;
         vm.professor = null;
+        vm.students = [];
         vm.negative = 0;
+        vm.flag = false;
 
         professors.get({ id: professorid },
             function (successResult){
@@ -31,6 +33,7 @@
                 angular.forEach (vm.section.students,
                     function (value){
                         vm.lectures = value.assistance;
+                        vm.subTotal = 0;
                         angular.forEach (value.assistanceTotal,
                             function (valued){
 
@@ -39,9 +42,19 @@
                                 } else {
                                     vm.negative++;
                                 }
-                        });        
+                                vm.subTotal = vm.positive + vm.negative;
+                        });
+                        if(((vm.positive/vm.subTotal)*100)<75){
+                             vm.students.push(value);
+                             vm.flag = true;
+                        };
+                        vm.positiveTotal = vm.positiveTotal + vm.positive; 
+                        vm.negativeTotal = vm.negativeTotal + vm.negative;
+                        vm.positive = 0;
+                        vm.negative = 0;
+                        vm.subTotal = 0;
                 });
-                vm.total = vm.positive + vm.negative;
+                vm.total = vm.positiveTotal + vm.negativeTotal;
                 vm.percentage = (vm.positive/vm.total)*100; 
             },
             function (){
