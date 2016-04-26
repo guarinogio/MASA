@@ -68,9 +68,9 @@ db.once('open', function() {
 	app.get('/professors/:id', function(req, res){
 		console.log('Received GET professor request');
 		console.log(req.params);
-		Professor.findOne(req.params.id, 
+		Professor.findById(req.params.id, 
 			function(err, docs){
-			//console.log(docs);
+			console.log(docs);
 			res.json(docs);
 		})
 	});
