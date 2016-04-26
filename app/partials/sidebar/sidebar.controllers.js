@@ -14,7 +14,7 @@
 
         $scope.items = [
             {
-                text: 'Modulo de Administración', 
+                text: 'Módulo de Administración', 
                 subItems: [
                     {
                         state: 'ProfessorList',
@@ -27,7 +27,7 @@
                 ]
             },
             {
-                text: 'Modulo de Materias', 
+                text: 'Módulo de Materias', 
                 subItems: [
                     {
                         state: 'CourseList',
@@ -40,7 +40,7 @@
                 ]
             },                
             {
-                text: 'Modulo de Reportes', 
+                text: 'Módulo de Reportes', 
                 subItems: [
                     {
                         state: 'courseReport',
