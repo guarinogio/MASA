@@ -18,11 +18,11 @@
                 subItems: [
                     {
                         state: 'ProfessorList',
-                        text: 'Listar Profesores'
+                        text: 'Listado de Profesores'
                     },
                     {
                         state: 'ProfessorCreate',
-                        text: 'Agregar Profesores'
+                        text: 'Nuevo Profesor'
                   }
                 ]
             },
@@ -31,11 +31,11 @@
                 subItems: [
                     {
                         state: 'CourseList',
-                        text: 'Listar Materias'
+                        text: 'Listado de Materias'
                     },
                     {
                         state: 'CourseCreate',
-                        text: 'Agregar Materia'
+                        text: 'Nueva Materia'
                   }
                 ]
             },                
@@ -44,9 +44,9 @@
                 subItems: [
                     {
                         state: 'courseReport',
-                        text: 'Reportes'
+                        text: 'Reportes por Materia'
                     }     
-                ]
+                ]   
             }
         ];
     };

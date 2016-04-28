@@ -20,6 +20,7 @@
                         if (value._id == selectedCourse._id ) {
                             vm.index = key;
                             vm.section = value.sections;
+                            vm.course = value.name;
                         }
                     }); 
             },
@@ -45,7 +46,8 @@
             $rootScope.otroBotonOk = false;
             $rootScope.botonCancelar = true;
             $rootScope.rsplice = false;
-            $rootScope.mensaje = "¿Seguro que desea eliminar la sección?";
+            var name = vm.section[index].name;
+            $rootScope.mensaje = "¿Seguro que desea eliminar la sección "+name+"?";
             
             $scope.modalInstance = $modal.open({
                 animation: $rootScope.animationsEnabled,

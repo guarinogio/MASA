@@ -34,5 +34,22 @@
                     }
                 }
             })
+            .state('StudentUpdate', {
+                url: '/StudentUpdate',
+                views: {
+                    sidebar: {
+                        templateUrl: 'partials/sidebar/sidebar.html',
+                        controller: 'SidebarCtrl'
+                    },
+                    navbar: {
+                        templateUrl: 'partials/sidebar/navbar.html'
+                    },
+                    content: {
+                        templateUrl: 'partials/students/student_update.html',
+                        controller: 'StudentUpdateCtrl',
+                        controllerAs: 'vm' 
+                    }
+                }
+            })
     };
 })();

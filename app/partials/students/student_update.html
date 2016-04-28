@@ -1,0 +1,54 @@
+<div>
+    <form name="vm.data_input_form" role="form" novalidate 
+    ng-submit="vm.submit()">
+        <div class="row clearfix">
+            <h4>Correo Electronico del Alumno {{vm.student.lastname}}, {{vm.student.name}}</h4>
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <br><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 column">
+                    <label for="correo">Dirección de Correo Actual</label>
+                    <input class="form-control" 
+                    ng-model="vm.student.email" 
+                    readonly="readonly"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 column">
+                    <label for="correo">Nueva Dirección de Correo</label>
+                    <input type="correo" class="form-control" 
+                    name="correo" ng-model="vm.newMail" 
+                    ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" placeholder="me@example.com" required/>
+                    <div class="error" ng-show="vm.submitted && 
+                    vm.data_input_form.correo.$invalid">
+                        <small class="error" 
+                        ng-show="vm.data_input_form.correo.$error.required">
+                            El Correo del Alumno es obligatorio.
+                        </small>
+                        <small class="error" 
+                        ng-show="vm.data_input_form.correo.$error.pattern">
+                            El formato del Correo del Alumno es incorrecto.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-2 column">
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <p class="input-group">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn-success btn">
+                            Actualizar Dirección de Correo</button>
+                        <button type="button" class="btn-warning btn" style="margin: 10px" ng-click="vm.back()">Regresar</button>
+                    </span>
+                    </p>
+                </div>
+            </div>
+        </div> 
+    </form>
+</div>

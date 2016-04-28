@@ -25,20 +25,18 @@
         };
                 
         vm.eliminarMateriaModal = function (index) {
-            $rootScope.index = index;
-            $rootScope.botonOk = true;
-            $rootScope.otroBotonOk = false;
-            $rootScope.botonCancelar = true;
-            $rootScope.rsplice = false;
-            $rootScope.mensaje = "¿Seguro que desea eliminar la materia?";
+            $scope.index = index;
+            $scope.botonOk = true;
+            $scope.otroBotonOk = false;
+            $scope.botonCancelar = true;
+            var name = vm.course[index].name;
+            $scope.mensaje = "¿Seguro que desea eliminar la Materia "+name+"?";
             $scope.modalInstance = $modal.open({
-                animation: $rootScope.animationsEnabled,
                 templateUrl: '/partials/course/modal/delete_course_modal.html',
                 scope: $scope,
                 size: 'sm',
                 resolve: {
                   items: function () {
-                    return "";
                   }
                 }
             });
@@ -46,18 +44,18 @@
         };
         
         vm.eliminarMateria = function (index) {
-            $rootScope.botonOk = false;
-            $rootScope.otroBotonOk = true;
-            $rootScope.botonCancelar = false;
+            $scope.botonOk = false;
+            $scope.otroBotonOk = true;
+            $scope.botonCancelar = false;
             var name = vm.course[index].name;
             vm.professor.courses.splice(index, 1);
             
             professors.update({ id: professorid }, vm.professor,
                 function () {
-                    $rootScope.mensaje = "Materia " + name + " eliminada";
+                    $scope.mensaje = "Materia " + name + " eliminada";
                 },
                 function () {
-                    $rootScope.mensaje = "Error eliminando la materia" + name;
+                    $scope.mensaje = "Error eliminando la materia" + name;
                 });   
         };
 

@@ -7,6 +7,6 @@
 
     courses.$inject = ['$resource','$rootScope'];
     function courses($resource, $rootScope){
-        return $resource('http://'+$rootScope.domainUrl+'/courses/:id', null);
+        return $resource('http://'+$rootScope.domainUrl+'/professors/:id/courses', null);
     };
 })();

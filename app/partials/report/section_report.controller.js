@@ -19,6 +19,7 @@
                 angular.forEach (vm.professor.courses, 
                     function (value, key){
                         if (value._id == selectedCourse._id ) {
+                            vm.course = value.name;
                             vm.index = key;
                             vm.section = value.sections;
                         }

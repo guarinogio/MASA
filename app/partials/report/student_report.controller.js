@@ -16,6 +16,7 @@
         professors.get({ id: professorid },
             function (successResult){
                 vm.professor = successResult;
+                vm.course = vm.professor.courses[selectedCourse.index].name;
                 angular.forEach (vm.professor.courses[selectedCourse.index].sections, 
                     function (value, key){
                         if (value._id == selectedSection._id ) {

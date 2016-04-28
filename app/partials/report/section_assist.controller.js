@@ -47,11 +47,12 @@
                                 }
                                 vm.subTotal = vm.positive + vm.negative;
                         });
-                        if(((vm.positive/vm.subTotal)*100)<75){
+                        if(((vm.positive/vm.subTotal)*100)>75){
+                            vm.studentsPassed.push(value);
+                        }else{
                             vm.students.push(value);
                             vm.flag = true;
-                        }else{
-                            vm.studentsPassed.push(value);
+                            
                         } 
                         vm.positiveTotal = vm.positiveTotal + vm.positive; 
                         vm.negativeTotal = vm.negativeTotal + vm.negative;

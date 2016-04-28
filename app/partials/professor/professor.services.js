@@ -7,7 +7,8 @@
         .value('selectedCourse',{})
         .value('selectedSection',{})
         .value('selectedStudent',{})
-        .value('profesorSeleccionado',{});
+        .value('profesorSeleccionado',{})
+        .value('data',{});
 
     professors.$inject = ['$resource','$rootScope'];
     function professors($resource, $rootScope){
