@@ -4,9 +4,13 @@ var app = express();
 var db = mongoose.connection;
 //var Professor = require('./models/professor');
 var bodyParser = require('body-parser');
-
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
+
+var nodemailer = require('nodemailer');
+
+// create reusable transporter object using the default SMTP transport
+var transporter = nodemailer.createTransport('smtps://reynaldo.reyes.4@gmail.com:zwvdhyensrwnfipt@smtp.gmail.com');
 
 db.on('error', console.error);
 db.once('open', function() {
@@ -94,7 +98,22 @@ db.once('open', function() {
 
 		professor.save(
 			function(err, docs){
-			//console.log(docs);
+			// setup e-mail data with unicode symbols
+			var mailOptions = {
+			    from: '"Rey Reyes" <reynaldo.reyes.4@gmail.com>', // sender address
+			    to: req.body.email, // list of receivers
+			    subject: 'Registro en la aplicación M.A.S.A.',
+			    text: 'Este es un correo automatizado para informarle que ha sido registrado en la aplicación M.A.S.A. sus credenciales son: '+ req.body.id +' / '+ req.body.password,
+			    html: 'Este es un correo automatizado para informarle que ha sido registrado en la aplicación <b> M.A.S.A.</b> sus credenciales son: '+ req.body.id +' / '+ req.body.password
+			};
+
+			// send mail with defined transport object
+			transporter.sendMail(mailOptions, function(error, info){
+			    if(error){
+			        return console.log(error);
+			    }
+			    console.log('Message sent: ' + info.response);
+			});
 			res.json(docs);
 		})
 	});

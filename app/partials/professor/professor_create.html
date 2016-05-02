@@ -7,7 +7,7 @@
             <div class="col-md-12 column well">
                 <div class="row">
                     <div class="col-md-4 column">
-                        <label for="cedula">Numero de Cédula</label>
+                        <label for="cedula">Numero de Cédula *</label>
                         <input type="numeric" class="form-control" 
                         name="cedula" ng-model="vm.profesor.Cedula" 
                         placeholder="12345678" required/>
@@ -20,10 +20,10 @@
                         </div>
                     </div>
                     <div class="col-md-4 column">
-                        <label for="nombre">Nombre</label>
+                        <label for="nombre">Nombres *</label>
                         <input type="text" class="form-control" 
-                        name="nombre" ng-model="vm.profesor.Nombre"
-                        required/>
+                        name="nombre" ng-model="vm.profesor.Nombre" 
+                        placeholder="Andres Jesús" required/>
                         <div class="error" ng-show="vm.submitted && 
                         vm.data_input_form.nombre.$invalid">
                             <small class="error" 
@@ -33,9 +33,10 @@
                         </div>
                     </div>
                     <div class="col-md-4 column">
-                        <label for="apellido">Apellido</label>
+                        <label for="apellido">Apellidos *</label>
                         <input type="text" class="form-control" 
-                        name="apellido" ng-model="vm.profesor.Apellido"  required/>
+                        name="apellido" ng-model="vm.profesor.Apellido"  
+                        placeholder="Perez Moreno" required/>
                         <div class="error" ng-show="vm.submitted && 
                         vm.data_input_form.apellido.$invalid">
                             <small class="error" 
@@ -48,10 +49,10 @@
                 <div class="row clearfix"><div class="col-md-12 column"><br><br></div></div>
                 <div class="row">
                     <div class="col-md-4 column">
-                        <label for="correo">Dirección de Correo</label>
-                        <input type="correo" class="form-control" 
+                        <label for="correo">Dirección de Correo *</label>
+                        <input type="email" class="form-control" 
                         name="correo" ng-model="vm.profesor.Correo" 
-                        ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" placeholder="me@example.com" required/>
+                        placeholder="me@example.com" required/>
                         <div class="error" ng-show="vm.submitted && 
                         vm.data_input_form.correo.$invalid">
                             <small class="error" 
@@ -68,15 +69,15 @@
                         <label for="telefono">Número de Teléfono</label>
                         <input type="telefono" class="form-control" 
                         name="telefono" ng-model="vm.profesor.Telefono" 
-                        ng-pattern="/\d{4}-\d{7}/" maxlength="13"
-                        placeholder="0424-1239876"/>
+                        ng-pattern="/\d{13}/" maxlength="13"
+                        placeholder="04241239876"/>
                         <small class="error" 
                         ng-show="vm.data_input_form.telefono.$error.pattern">
                             El Formato del Número de Teléfono es incorrecto.
                         </small>
                     </div>
                     <div class="col-md-4 column">
-                        <label for="password">Contraseña</label>
+                        <label for="password">Contraseña *</label>
                         <input type="password" class="form-control" ng-model="vm.profesor.Password" maxlength="8" required/>
                         <div class="error" ng-show="vm.submitted && vm.data_input_form.password.$invalid">
                             <small class="error" ng-show="vm.data_input_form.password.$error.required">
@@ -86,6 +87,7 @@
                     </div>
                 </div>
             </div>
+            <label> * Estos campos son obligatorios.</label>
         </div>
         <div class="row clearfix">
             <div class="col-md-2 column">

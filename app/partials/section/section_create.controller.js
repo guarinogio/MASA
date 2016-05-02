@@ -11,6 +11,7 @@
         var professorid = $rootScope.professorId;
         var vm = this;
         vm.course = {};
+        vm.itExists = false;
         vm.selectedCourse = selectedCourse;
         vm.submitted = false;
         vm.semester, vm.section, vm.materias;
@@ -32,9 +33,7 @@
             },
             function (){
                 console.log("Error al obtener los datos.");
-
             });
-
 
         vm.submit = function () {
 
@@ -59,16 +58,31 @@
                     }
                 });
 
-                vm.professor.courses[vm.index].sections.push(vm.package);
-                 professors.update({ id: professorid }, vm.professor,
-                    function(){
-                        $rootScope.botonOk = true;
-                        $rootScope.mensaje = "Sección " + vm.name + " creada";
-                    },
-                    function(){
-                        $rootScope.botonOk = true;
-                        $rootScope.mensaje = "Error creando la seccion " + vm.name;
+
+                angular.forEach (vm.professor.courses[vm.index].sections, 
+                    function (value, key){
+                        if (value.name == vm.name) {
+                            if(value.semester == vm.semester){
+                                vm.itExists = true;
+                            }
+                        }   
+                    }); 
+
+                if(!vm.itExists){
+                    vm.professor.courses[vm.index].sections.push(vm.package);
+                    professors.update({ id: professorid }, vm.professor,
+                        function(){
+                            $rootScope.botonOk = true;
+                            $rootScope.mensaje = "Sección " + vm.name + " creada";
+                        },
+                        function(){
+                            $rootScope.botonOk = true;
+                            $rootScope.mensaje = "Error creando la seccion " + vm.name;
                     });
+                }else{
+                    $rootScope.botonOk = true;
+                    $rootScope.mensaje = "Sección Duplicada, " + vm.name + " existe en el semestre "+ vm.semester + ".";
+                }
             }else{
                 vm.submitted = true;
             }
@@ -88,10 +102,9 @@
                     var sheet = workbook.SheetNames[0];
                     var worksheet = workbook.Sheets[sheet];
 
-                    /* Find desired cell containing semester and section */
+                    // Find desired cell containing semester and section
                     vm.semester = worksheet['B5'].v;
                     vm.name = worksheet['B9'].v;
-                    //$scope.$apply();
 
                     for (z in worksheet) {
                         /* all keys that do not begin with "!" correspond to cell addresses */
@@ -107,7 +120,6 @@
                                 vm.students.push(student);
                                 student = {};
                             }
-                             
                         } 
                     };
                     $scope.$apply();
@@ -120,13 +132,6 @@
         $scope.ok = function (urlLo) {
             $state.go('SectionList');
             $scope.modalInstance.dismiss('cancel');
-        };
-
-        $rootScope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $rootScope.opened = true;
         };
 
         vm.back = function () {

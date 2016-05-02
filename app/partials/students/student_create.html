@@ -7,9 +7,9 @@
             <div class="col-md-12 column well">
                 <div class="row">
                     <div class="col-md-4 column">
-                        <label for="cedula">Numero de Cedula</label>
+                        <label for="cedula">Número de Cédula * </label>
                         <input type="numeric" class="form-control" 
-                        name="cedula" ng-model="vm.estudiante.Cedula" placeholder="12345678" required/>
+                        name="cedula" ng-model="vm.estudiante.Cedula" placeholder="15687497" required/>
                         <div class="error" ng-show="vm.submitted && 
                         vm.data_input_form.cedula.$invalid">
                             <small class="error" 
@@ -19,9 +19,9 @@
                         </div>
                     </div>
                     <div class="col-md-4 column">
-                        <label for="nombre">Nombre</label>
+                        <label for="nombre">Nombres * </label>
                         <input type="text" class="form-control" name="nombre" 
-                        ng-model="vm.estudiante.Nombre" required/>
+                        ng-model="vm.estudiante.Nombre" placeholder="Augusto José" required/>
                         <div class="error" ng-show="vm.submitted && 
                         vm.data_input_form.nombre.$invalid">
                             <small class="error" ng-show="vm.data_input_form.nombre.$error.required">
@@ -30,9 +30,10 @@
                         </div>
                     </div>
                     <div class="col-md-4 column">
-                        <label for="apellido">Apellido</label>
+                        <label for="apellido">Apellidos * </label>
                         <input type="text" class="form-control" 
                         name="apellido" ng-model="vm.estudiante.Apellido"
+                        placeholder="Gutierrez Rodriguez"
                         required/>
                         <div class="error" ng-show="vm.submitted && 
                         vm.data_input_form.apellido.$invalid">
@@ -46,10 +47,10 @@
                     <br><br></div></div>
                 <div class="row">
                     <div class="col-md-4 column">
-                        <label for="correo">Dirección de Correo</label>
-                        <input type="correo" class="form-control" 
+                        <label for="correo">Dirección de Correo * </label>
+                        <input type="email" class="form-control" 
                         name="correo" ng-model="vm.estudiante.Correo" 
-                        ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" placeholder="me@example.com" required/>
+                        placeholder="me@example.com" required/>
                         <div class="error" ng-show="vm.submitted && 
                         vm.data_input_form.correo.$invalid">
                             <small class="error" 
@@ -64,6 +65,7 @@
                     </div>
                 </div>
             </div>
+            <label> * Estos campos son obligatorios.</label>
         </div>
         <div class="row clearfix">
             <div class="col-md-2 column">

@@ -7,10 +7,10 @@
             <div class="col-md-12 column well">
                 <div class="row">
                     <div class="col-md-6 column">
-                        <label for="code">Código de la Materia</label>
+                        <label for="code">Código de la Materia * </label>
                         <input type="numeric" class="form-control" 
                         name="code" ng-model="vm.course.code"
-                        ng-pattern="/\d{4}/" maxlength="4" required/>
+                        ng-pattern="/\d{4}/" placeholder="6201" maxlength="4" required/>
                         <div class="error" ng-show="vm.submitted && 
                         vm.data_input_form.code.$invalid">
                             <small class="error" 
@@ -20,9 +20,9 @@
                         </div>
                     </div>
                     <div class="col-md-6 column">
-                        <label for="name">Nombre de la Materia</label>
+                        <label for="name">Nombre de la Materia * </label>
                         <input type="text" class="form-control" 
-                        name="name" ng-model="vm.course.name" required/>
+                        name="name" ng-model="vm.course.name" placeholder="Algoritmos y Programación" required/>
                         <div class="error" ng-show="vm.submitted && 
                         vm.data_input_form.name.$invalid">
                             <small class="error" 
@@ -36,10 +36,10 @@
                     <br></div></div>
                 <div class="row">
                     <div class="col-md-6 column">
-                       <label for="credits">Cantidad de Creditos</label>
+                       <label for="credits">Cantidad de Creditos * </label>
                         <input type="numeric" class="form-control" 
                         name="credits" ng-model="vm.course.credits"
-                        maxlength="1" placeholder="5" required/>
+                        maxlength="1" placeholder="6" required/>
                         <div class="error" ng-show="vm.submitted && 
                         vm.data_input_form.credits.$invalid">
                             <small class="error" 
@@ -49,9 +49,10 @@
                         </div>
                     </div>
                     <div class="col-md-6 column">
-                        <label for="description">Descripción</label>
+                        <label for="description">Descripción * 
+                        </label>
                         <input type="text" class="form-control" 
-                        name="description" ng-model="vm.course.description"
+                        name="description" ng-model="vm.course.description"placeholder="Materia Obligatoria de Componente Básico del Primer Semestre."
                         required/>
                         <div class="error" ng-show="vm.submitted && 
                         vm.data_input_form.description.$invalid">
@@ -62,7 +63,8 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
+            <label> * Estos campos son obligatorios.</label> 
         </div>
         <div class="row clearfix">
             <div class="col-md-2 column">
