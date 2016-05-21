@@ -6,8 +6,16 @@
         <div> Estadisticas </div>
         <div> Porcentaje de Asistencia: {{vm.percentage}} % </div>
         <div> Total de Dias de Clase: {{vm.lectures}} </div>
-        <br><br/>
+        <br>
     </div>
+
+    <button class = "btn-warning btn" 
+        type = "button" 
+        style = "margin: 10px"
+        ng-click = "vm.back()">
+        Regresar
+    </button>
+    <br><br/>
 
     <div ng-show="vm.flag">    
         <h4 style="color: red"> Estudiantes con menos de 75% de Asistencia </h4>
@@ -57,11 +65,4 @@
                 </tr>
             </tbody>
         </table>
-
-    <button class = "btn-warning btn" 
-    type = "button" 
-    style = "margin: 10px"
-    ng-click = "vm.back()">
-        Regresar
-    </button>
 </div>

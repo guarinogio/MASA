@@ -15,23 +15,35 @@
     .config(function($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.otherwise('/');
-        
-        $stateProvider
+         $stateProvider
+            .state('index', {
+                abstract: true,
+                views: {
+                    'sidebar': {
+                        templateUrl: 'partials/sidebar/sidebar.html',
+                        controller: 'SidebarCtrl'
+                    },
+                    'navbar': {
+                        templateUrl: 'partials/sidebar/navbar.html',
+                        controller: 'NavbarCtrl',
+                        controllerAs: 'vm'
+                    },
+                }
+            })
             .state('login', {
                 url: '/login',
                 views: {
                     content: {
-                templateUrl: 'partials/login/login.html',
-                controller: 'loginCtrl',
-                controllerAs: 'vm'
+                        templateUrl: 'partials/login/login.html',
+                        controller: 'loginCtrl',
+                        controllerAs: 'vm'
+                    }
                 }
-            }
-        })
+            })
     })
 
     .run(function ($rootScope) {
         $rootScope.domainUrl = 'Localhost:3000';
-        $rootScope.professorId = '56f5fd3a20047f3c15b05f0e';
     });
 
 })();

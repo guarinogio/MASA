@@ -5,10 +5,11 @@
         .module('app.section')
         .controller('SectionListCtrl', SectionListCtrl)
 
-    SectionListCtrl.$inject = [ '$scope', '$rootScope', '$state', 'professors', '$modal', 'selectedCourse', 'selectedSection'];
-    function SectionListCtrl ( $scope, $rootScope, $state, professors, $modal, selectedCourse, selectedSection ){
+    SectionListCtrl.$inject = [ '$scope', '$state', 'professors', '$modal', 'selectedCourse', 'selectedSection', 'authentication'];
+    function SectionListCtrl ( $scope, $state, professors, $modal, selectedCourse, selectedSection, authentication ){
         var vm = this;
-        var professorid = $rootScope.professorId;
+        var user = authentication.currentUser();
+        var professorid = user._id;
         vm.section = [];
         vm.professor = null;
 
@@ -27,59 +28,44 @@
             function (){
                 console.log("Error al obtener los datos.");
 
-            });
-
-        /**************************Eliminar Matricula**************************/
-        /* En este proceso, primero se llama a un Modal el cual se cerciora que
-        el usuario se asegure de eliminar la matricula escogida, el usuario al 
-        confirmar su decision llama automaticamente a la funcion que hara la 
-        llamada a servicio que borrara la matricula de la base de datos.
-        */
+        });
 
         vm.createSection = function () {
             $state.go('SectionCreate');
         };
 
         vm.eliminarMatriculaModal = function (index) {
-            $rootScope.index = index;   
-            $rootScope.botonOk = true;
-            $rootScope.otroBotonOk = false;
-            $rootScope.botonCancelar = true;
-            $rootScope.rsplice = false;
+            $scope.index = index;   
+            vm.botonOk = true;
+            vm.otroBotonOk = false;
+            vm.botonCancelar = true;
+            vm.rsplice = false;
             var name = vm.section[index].name;
-            $rootScope.mensaje = "¿Seguro que desea eliminar la sección "+name+"?";
+            vm.mensaje = "¿Seguro que desea eliminar la sección "+name+"?";
             
             $scope.modalInstance = $modal.open({
-                animation: $rootScope.animationsEnabled,
                 templateUrl: '/partials/section/modal/delete_section_modal.html',
                 scope: $scope,
-                size: 'sm',
-                resolve: {
-                    items: function () {
-                        return "";
-                    }
-                }
+                size: 'sm'
             });
         };
 
         vm.eliminarMatricula = function (index) {
-            $rootScope.botonOk = false;
-            $rootScope.otroBotonOk = true;
-            $rootScope.botonCancelar = false;
+            vm.botonOk = false;
+            vm.otroBotonOk = true;
+            vm.botonCancelar = false;
             var name = vm.section[index].name;
-
             vm.professor.courses[vm.index].sections.splice(index, 1);
+
             professors.update({ id: professorid }, vm.professor, 
                 function () {
-                    $rootScope.rsplice = true;
-                    $rootScope.mensaje = "Sección " + name + " eliminada";
+                    vm.rsplice = true;
+                    vm.mensaje = "Sección " + name + " eliminada";
                 },
                 function () {
-                    $rootScope.mensaje = "Error eliminando la sección " + name;
+                    vm.mensaje = "Error eliminando la sección " + name;
                 });
         };
-
-        /*************************Fin de Eliminar Matricula*******************/
 
         vm.modificarMatricula = function (index) {
             selectedSection._id = vm.section[index]._id;

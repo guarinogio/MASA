@@ -6,11 +6,12 @@
         .controller('ProfessorCreateCtrl', ProfessorCreateCtrl)
 
     ProfessorCreateCtrl.$inject = 
-    ['$scope','$rootScope', '$state', 'professors', '$modal'];
-    function ProfessorCreateCtrl($scope, $rootScope, $state, professors, $modal){
+    ['$scope', '$state', 'professors', '$modal','authentication'];
+    function ProfessorCreateCtrl($scope, $state, professors, $modal, authentication){
         
         var vm = this;
-        $rootScope.mensaje = "";
+        vm.botonOk = false;
+        vm.mensaje = "";
         vm.submit = function() {
 
             if (vm.data_input_form.$valid){
@@ -24,39 +25,32 @@
                     "password": vm.profesor.Password
                 };
 
-                $rootScope.botonOk = false;
                 $scope.modalInstance = $modal.open({
-                    animation: $rootScope.animationsEnabled,
                     templateUrl: 'partials/professor/modal/create_professor_modal.html',
                     scope: $scope,
                     size: 'sm',
                     resolve: {
                         items: function () {
-                            return $rootScope.items;
                         }
                     }
                 });
 
                 professors.save(professor,
-                    function(){
-                        $rootScope.botonOk = true;
-                        $rootScope.mensaje = 
+                    function(data){
+                        authentication.saveToken(data.token);
+                        vm.botonOk = true;
+                        vm.mensaje = 
                         "Profesor " + vm.profesor.Apellido + ", " + vm.profesor.Nombre + " agregado";
                     },
-
                     function(){
-                        $rootScope.botonOk = true;
-                        $rootScope.urlLo = 'listarProfesor';
-                        $rootScope.mensaje = 
+                        vm.botonOk = true;
+                        vm.mensaje = 
                         "Error al agregar al profesor " + vm.profesor.Apellido + ", " + vm.profesor.Nombre;
                     });
-            }else{
-
-                vm.submitted = true;
             }
         }
 
-        $scope.ok = function (urlLo) {
+        $scope.ok = function () {
             $state.go('ProfessorList');
             $scope.modalInstance.dismiss('cancel');
         };

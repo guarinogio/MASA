@@ -8,28 +8,15 @@
                 <tr>
                     <th width="10%">
                         Código
-                        <span ng-show="sortType == 'code' && 
-                        !sortReverse" class="fa fa-caret-down"></span>
-                        <span ng-show="sortType == 'code' && 
-                        sortReverse" class="fa fa-caret-up"></span>
                     </th>
                     <th width="20%">
                         Nombre
-                        <span ng-show="sortType == 'name' && 
-                        !sortReverse" class="fa fa-caret-down"></span>
-                        <span ng-show="sortType == 'name' && 
-                        sortReverse" class="fa fa-caret-up"></span>
                     </th>
                     <th width="10%">
                         Creditos
-                        <span ng-show="sortType == 'credits' &&
-                        !sortReverse" class="fa fa-caret-down"></span>
-                        <span ng-show="sortType == 'credits' && sortReverse" class="fa fa-caret-up"></span>
                     </th>
                     <th width="40%" style="text-align: center">
-                
-                        Descripción  
-    
+                        Descripción
                     </th>
                     <th width="10%" style="text-align: center">
                         Secciones
@@ -47,7 +34,7 @@
                     <td style="vertical-align:middle">{{ course.description }}</td>
                      <td style="text-align: center">
                         <span 
-                        title="Click aqui para ver Secciones" 
+                        title="Haga click para listar las secciones de esta materia" 
                         class="glyphicon glyphicon-list" 
                         aria-hidden="true" 
                         ng-click="vm.listarSecciones($index)" 
@@ -55,7 +42,7 @@
                     </td>
                     <td style="text-align: center">
                         <span 
-                        title="Click aqui para Eliminar la Materia" 
+                        title="Haga click para eliminar esta materia" 
                         class="glyphicon glyphicon-remove" 
                         aria-hidden="true" 
                         ng-click="vm.eliminarMateriaModal($index)" 

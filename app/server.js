@@ -1,16 +1,30 @@
 var mongoose = require('mongoose');
 var express = require('express');
+var path = require ('path');
+var favicon = require ('serve-favicon');
+var logger = require('morgan');
+var cookieparser = require('cookie-parser');
 var app = express();
 var db = mongoose.connection;
-//var Professor = require('./models/professor');
+var crypto = require('crypto');
 var bodyParser = require('body-parser');
+var jwbt = require('jsonwebtoken');
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport('smtps://reynaldo.reyes.4@gmail.com:zwvdhyensrwnfipt@smtp.gmail.com');
+var jwt = require('express-jwt');
+var auth = jwt({
+  secret: 'MY_SECRET',
+  userProperty: 'payload'
+});
+
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
-
-var nodemailer = require('nodemailer');
-
-// create reusable transporter object using the default SMTP transport
-var transporter = nodemailer.createTransport('smtps://reynaldo.reyes.4@gmail.com:zwvdhyensrwnfipt@smtp.gmail.com');
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401);
+    res.json({"message" : err.name + ": " + err.message});
+  }
+});
 
 db.on('error', console.error);
 db.once('open', function() {
@@ -47,21 +61,59 @@ db.once('open', function() {
 	});
 
 	var professorSchema = new mongoose.Schema({
-	  id: Number,
-	  name: String,
-	  lastname: String,
-	  email: String, 
-	  number: String,
-	  role: String,
-	  password: String,
-	  courses: [courseSchema]
+	  	id: {
+	  		type: Number,
+		    unique: true,
+		    required: true
+	  	},
+	  	name: String,
+		lastname: String,
+		email: String, 
+	  	number: String,
+	  	role: String,
+	   	hash: String,
+  		salt: String,
+	  	courses: [courseSchema]
 	});
 
-	var Professor = mongoose.model('Professor', professorSchema);
-	
-	//Professor CRUD
+	professorSchema.methods.setPassword = function(password){
+	  	this.salt = crypto.randomBytes(16).toString('hex');
+	    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+	};
 
-	app.get('/professors', function(req, res){
+	professorSchema.methods.validPassword = function(password){
+		var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+		return this.hash === hash;
+	};
+
+	professorSchema.methods.generateJwt = function() {
+		var profile = {
+			_id: this._id,
+   			role: this.role
+		};
+		return jwbt.sign(profile, "MY_SECRET", { expiresIn: 18000 });
+	};
+
+	var Professor = mongoose.model('professor', professorSchema);
+
+	var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+
+	passport.use(new LocalStrategy({
+	    usernameField: 'id'
+	  	},
+		function(username, password, done) {
+		    Professor.findOne({ id: username }, function (err, professor) {
+			    if (err) return done(err);
+			    if (!professor) return done(null, false, {message: 'professor not found'});
+			    if (!professor.validPassword(password)) return done(null, false, {message: 'Password is wrong'});
+			    return done(null, professor);
+			});
+		}));
+
+	app.use(passport.initialize());
+
+	app.get('/professors', auth, function(req, res){
 		console.log('Received GET ALL professors request');
 		Professor.find(function(err, docs){
 			//console.log(docs);
@@ -69,7 +121,7 @@ db.once('open', function() {
 		})
 	});
 
-	app.get('/professors/:id', function(req, res){
+	app.get('/professors/:id', auth, function(req, res){
 		console.log('Received GET professor request');
 		console.log(req.params);
 		Professor.findById(req.params.id, 
@@ -79,7 +131,7 @@ db.once('open', function() {
 		})
 	});
 
-	app.post('/professors', function(req, res){
+	app.post('/professors',  function(req, res){
 		console.log('Received ADD professor request');
 		//console.log(req.body);
 
@@ -90,35 +142,32 @@ db.once('open', function() {
 		    email: req.body.email, 
 		    number: req.body.number,
 		    role: req.body.role,
-		    password: req.body.password,
-		    course: [
-		    	{ name:"Materia" }
-		    ]
+		    course: [{ name:"Materia" }]
 		})
+		professor.setPassword(req.body.password);
 
 		professor.save(
 			function(err, docs){
-			// setup e-mail data with unicode symbols
-			var mailOptions = {
-			    from: '"Rey Reyes" <reynaldo.reyes.4@gmail.com>', // sender address
-			    to: req.body.email, // list of receivers
-			    subject: 'Registro en la aplicación M.A.S.A.',
-			    text: 'Este es un correo automatizado para informarle que ha sido registrado en la aplicación M.A.S.A. sus credenciales son: '+ req.body.id +' / '+ req.body.password,
-			    html: 'Este es un correo automatizado para informarle que ha sido registrado en la aplicación <b> M.A.S.A.</b> sus credenciales son: '+ req.body.id +' / '+ req.body.password
-			};
-
-			// send mail with defined transport object
-			transporter.sendMail(mailOptions, function(error, info){
-			    if(error){
-			        return console.log(error);
-			    }
-			    console.log('Message sent: ' + info.response);
-			});
-			res.json(docs);
-		})
+				// setup e-mail data with unicode symbols
+				var mailOptions = {
+				    from: '"Rey Reyes" <reynaldo.reyes.4@gmail.com>', // sender address
+				    to: req.body.email, // list of receivers
+				    subject: 'Registro en la aplicación M.A.S.A.',
+				    text: 'Este es un correo automatizado para informarle que ha sido registrado en la aplicación M.A.S.A. sus credenciales son: '+ req.body.id +' / '+ req.body.password,
+				    html: 'Este es un correo automatizado para informarle que ha sido registrado en la aplicación <b> M.A.S.A.</b> sus credenciales son: '+ req.body.id +' / '+ req.body.password
+				};
+				// send mail with defined transport object
+				transporter.sendMail(mailOptions, function(error, info){
+				    if(error) return console.log(error);
+				    console.log('Message sent: ' + info.response);
+				});
+				var token = professor.generateJwt();
+			    res.status(200);
+			    res.json({"token" : token});
+			})
 	});
 
-	app.delete('/professors/:id', function(req, res){
+	app.delete('/professors/:id', auth,  function(req, res){
 		console.log("Received DELETE professor request...");
 		console.log(req.params);
 		Professor.findByIdAndRemove(req.params.id, 
@@ -128,7 +177,7 @@ db.once('open', function() {
 		});
 	});
 
-	app.put('/professors/:id', function(req, res){
+	app.put('/professors/:id', auth,  function(req, res){
 		console.log("Received UPDATE professor request");
 		console.log("params:" + req.params);
 		console.log("body:" + req.body);
@@ -147,9 +196,30 @@ db.once('open', function() {
 			});
 		});
 	});
+
+	app.post('/login', function(req, res){
+		passport.authenticate('local', function(err, professor, info){
+		    var token;
+		    // If Passport throws/catches an error
+		    if (err) {
+		      	res.status(404).json(err);
+		      	return;
+		    }
+		    // If a user is found
+		    if(professor){
+		      	token = professor.generateJwt();
+		      	res.status(200);
+		      	res.json({
+		        	"token" : token
+		      	});
+		    // If user is not found
+		    } else {
+		     	res.status(401).json(info);
+		    }
+		})(req, res);
+	});
 });
 
 mongoose.connect('mongodb://localhost/AttendanceDB');
-
 app.listen(3000);
 console.log("server running on port 3000");

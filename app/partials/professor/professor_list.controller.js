@@ -6,14 +6,11 @@
         .controller('ProfessorListCtrl', ProfessorListCtrl)
 
     ProfessorListCtrl.$inject = 
-    [ '$scope', '$rootScope', '$state', 'professors', '$modal', 'profesorSeleccionado' ];
-    function ProfessorListCtrl( $scope, $rootScope, $state, professors, $modal, profesorSeleccionado ){
+    [ '$scope', '$state', 'professors', '$modal', 'profesorSeleccionado' ];
+    function ProfessorListCtrl( $scope, $state, professors, $modal, profesorSeleccionado ){
         
         var vm = this;
         vm.lista = true;
-        $rootScope.actOk = false;
-        $rootScope.loading = true;
-        $rootScope.table = false;
 
         var profesorArray = [];
         professors.query(
@@ -28,8 +25,6 @@
                         Correo: value.email
                     });
                 });
-                $rootScope.loading = false;
-                $rootScope.table = true;
                 vm.listaProfesor = profesorArray;
                 
             },
@@ -38,50 +33,42 @@
             });
 
         vm.eliminarProfesorModal = function (index) { 
-            $rootScope.index = index;
-            $rootScope.botonOK = true;
-            $rootScope.botonCancelar = true;
-            $rootScope.acceptButton = false;
+            $scope.index = index;
+            vm.botonOK = true;
+            vm.botonCancelar = true;
+            vm.acceptButton = false;
 
-            $rootScope.rsplice = false;
-            $rootScope.mensaje = "¿Seguro que desea eliminar el Profesor?";
+            vm.rsplice = false;
+            vm.mensaje = "¿Seguro que desea eliminar el Profesor?";
 
             $scope.modalInstance = $modal.open({
-                animation: $rootScope.animationsEnabled,
                 templateUrl: 'partials/professor/modal/list_professor_modal.html',
                 scope: $scope,
-                size: 'sm',
-                resolve: {
-                    items: function () {
-                        return "";
-                    }
-                }
+                size: 'sm'
             });
         };
 
         vm.eliminarProfesor = function (index) {
-
-            $rootScope.botonOK = false;
-            $rootScope.acceptButton = true;
-            $rootScope.botonCancelar = false;
+            vm.botonOK = false;
+            vm.acceptButton = true;
+            vm.botonCancelar = false;
 
             professors.delete({id: vm.profesor[index]._id}, 
                 function () {
-                    $rootScope.rsplice = true;
-                    $rootScope.mensaje = 
+                    vm.rsplice = true;
+                    vm.mensaje = 
                     "Profesor " + vm.profesor[index].name + " eliminado";
                 },
                 function () {
-                    $rootScope.listarProfesorsLoading = false;
-                    $rootScope.mensaje = 
+                    vm.mensaje = 
                     "Error eliminando al Profesor " + vm.profesor[index].name;
                 });
         };
 
         vm.removeProfesorSplice = function(index, rsplice) {
-            if(rsplice){
+            if(vm.rsplice){
                 vm.listaProfesor.splice(index, 1);
-                $rootScope.rsplice = false;
+                vm.rsplice = false;
             }
         };
 
@@ -95,13 +82,7 @@
             $state.go('ProfessorUpdate');
         };
 
-        $rootScope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            $rootScope.opened = true;
-        };
-
-        $scope.ok = function (urlLo) {
+        $scope.ok = function () {
             $state.reload();
             $scope.modalInstance.dismiss('cancel');
         };
@@ -109,7 +90,5 @@
         $scope.cancel = function () {
             $scope.modalInstance.dismiss('cancel');
         };
-
-        return vm;
     };
 })();

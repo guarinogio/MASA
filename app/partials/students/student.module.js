@@ -18,16 +18,10 @@
 
         $stateProvider
             .state('StudentCreate', {
+                parent: 'index',
                 url: '/StudentCreate',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/students/student_create.html',
                         controller: 'StudentCreateCtrl',
                         controllerAs: 'vm' 
@@ -35,16 +29,10 @@
                 }
             })
             .state('StudentUpdate', {
+                parent: 'index',
                 url: '/StudentUpdate',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/students/student_update.html',
                         controller: 'StudentUpdateCtrl',
                         controllerAs: 'vm' 

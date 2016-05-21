@@ -6,16 +6,17 @@
         .controller('SectionCreateCtrl', SectionCreateCtrl)
 
     SectionCreateCtrl.$inject = 
-    ['$scope','$rootScope', '$state', 'professors', '$modal', 'selectedCourse'];
-    function SectionCreateCtrl($scope, $rootScope, $state, professors, $modal, selectedCourse){
-        var professorid = $rootScope.professorId;
+    ['$scope', '$state', 'professors', '$modal', 'selectedCourse','authentication'];
+    function SectionCreateCtrl($scope, $state, professors, $modal, selectedCourse, authentication){
+        var user = authentication.currentUser();
+        var professorid = user._id;
         var vm = this;
         vm.course = {};
         vm.itExists = false;
         vm.selectedCourse = selectedCourse;
         vm.submitted = false;
         vm.semester, vm.section, vm.materias;
-        $rootScope.mensaje = "";
+        vm.mensaje = "";
         vm.students = [];
 
         professors.get({ id: professorid },
@@ -47,15 +48,9 @@
                 };
 
                 $scope.modalInstance = $modal.open({
-                    animation: $rootScope.animationsEnabled,
                     templateUrl: 'partials/section/modal/create_section_modal.html',
                     scope: $scope,
-                    size: 'sm',
-                    resolve: {
-                        items: function () {
-                            return $rootScope.items;
-                        }
-                    }
+                    size: 'sm'
                 });
 
 
@@ -72,19 +67,17 @@
                     vm.professor.courses[vm.index].sections.push(vm.package);
                     professors.update({ id: professorid }, vm.professor,
                         function(){
-                            $rootScope.botonOk = true;
-                            $rootScope.mensaje = "Sección " + vm.name + " creada";
+                            vm.botonOk = true;
+                            vm.mensaje = "Sección " + vm.name + " creada";
                         },
                         function(){
-                            $rootScope.botonOk = true;
-                            $rootScope.mensaje = "Error creando la seccion " + vm.name;
+                            vm.botonOk = true;
+                            vm.mensaje = "Error creando la seccion " + vm.name;
                     });
                 }else{
-                    $rootScope.botonOk = true;
-                    $rootScope.mensaje = "Sección Duplicada, " + vm.name + " existe en el semestre "+ vm.semester + ".";
+                    vm.botonOk = true;
+                    vm.mensaje = "Sección Duplicada, " + vm.name + " existe en el semestre "+ vm.semester + ".";
                 }
-            }else{
-                vm.submitted = true;
             }
         };
 

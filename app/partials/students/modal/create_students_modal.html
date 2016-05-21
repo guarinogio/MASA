@@ -2,8 +2,11 @@
     <h3 class="modal-title">Crear Estudiante</h3>
 </div>
 <div style="text-align: center" class="modal-body">
-    {{ mensaje }}
+    {{ vm.mensaje }}
 </div>
-<div  class="modal-footer">
-    <button class="btn btn-primary" ng-show="botonOk" type="button" ng-click="ok(urlLo)">Aceptar</button>
+<div class="modal-footer">
+    <button class="btn btn-primary" 
+    ng-show="vm.botonOk" 
+    type="button" 
+    ng-click="ok()">Aceptar</button>
 </div>

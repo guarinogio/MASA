@@ -2,13 +2,19 @@
     <h3 class="modal-title">Retirar Estudiante</h3>
 </div>
 <div style="text-align: center" class="modal-body">
-    {{ mensaje }}
+    {{ vm.mensaje }}
 </div>
 <div  class="modal-footer">
-    <button class="btn btn-primary" ng-show="botonOk"  type="button" 
+    <button class="btn btn-primary" 
+    ng-show="vm.botonOk"  
+    type="button" 
     ng-click="vm.retirarEstudiante(index)">OK</button>
-    <button class="btn btn-primary" ng-show="otroBotonOk" type="button" 
+    <button class="btn btn-primary" 
+    ng-show="vm.otroBotonOk" 
+    type="button" 
     ng-click="ok()">Aceptar</button>
-    <button class="btn btn-warning" ng-show="botonCancelar" type="button" 
+    <button class="btn btn-warning" 
+    ng-show="vm.botonCancelar" 
+    type="button" 
     ng-click="cancel()">Cancelar</button>
 </div>

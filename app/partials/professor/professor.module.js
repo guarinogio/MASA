@@ -18,17 +18,10 @@
 
         $stateProvider
             .state('ProfessorList', {
+                parent: 'index',
                 url: '/ProfessorList',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/professor/professor_list.html',
                         controller: 'ProfessorListCtrl',
                         controllerAs: 'vm'
@@ -37,16 +30,10 @@
             })
 
             .state('ProfessorCreate', {
+                parent: 'index',
                 url: '/ProfessorCreate',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/professor/professor_create.html',
                         controller: 'ProfessorCreateCtrl',
                         controllerAs: 'vm' 
@@ -55,16 +42,10 @@
             })
             
             .state('ProfessorUpdate', {
+                parent: 'index',
                 url: '/ProfessorUpdate',
                 views: {
-                    sidebar: {
-                      templateUrl: 'partials/sidebar/sidebar.html',
-                      controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                      templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/professor/professor_update.html',
                         controller: 'ProfessorUpdateCtrl',
                         controllerAs: 'vm' 

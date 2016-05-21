@@ -7,6 +7,13 @@
 
     courses.$inject = ['$resource','$rootScope'];
     function courses($resource, $rootScope){
-        return $resource('http://'+$rootScope.domainUrl+'/professors/:id/courses', null);
+        return $resource('http://'+$rootScope.domainUrl+'/professors/:id/courses', {}, {
+        		get: {
+        			method: 'GET',
+        			headers: {
+				    	Authorization: 'Bearer '+ authentication.getToken()
+				    }
+    			}
+			});
     };
 })();

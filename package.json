@@ -1,7 +1,7 @@
 {
-  "name": "masa-front",
+  "name": "masa",
   "version": "1.0.0",
-  "description": "Frontend for M.A.S.A. App.",
+  "description": "NPM Package for M.A.S.A. App.",
   "main": "app/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,8 +17,16 @@
   },
   "dependencies": {
     "body-parser": "latest",
-    "express" : "latest",
-    "gulp":"latest",
-    "mongoose":"latest"
+    "cookie-parser": "^1.4.1",
+    "express": "latest",
+    "express-jwt": "^3.4.0",
+    "favicon": "0.0.2",
+    "gulp": "latest",
+    "jsonwebtoken": "^6.2.0",
+    "mongoose": "latest",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "^2.3.0"
   }
 }

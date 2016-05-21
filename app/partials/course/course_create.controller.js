@@ -6,11 +6,12 @@
         .controller('CourseCreateCtrl', CourseCreateCtrl)
     
     CourseCreateCtrl.$inject = 
-    ['$scope', '$rootScope', '$modal', '$state', 'professors'];
-    function CourseCreateCtrl($scope, $rootScope, $modal, $state, professors) {
+    ['$scope', '$modal', '$state', 'professors', 'authentication'];
+    function CourseCreateCtrl($scope, $modal, $state, professors, authentication) {
         var vm = this;
         $scope.mensaje = "";
-        var professorid = $rootScope.professorId;
+        var user = authentication.currentUser();
+        var professorid = user._id;
 
         professors.get({ id: professorid }, 
             function (successResult){

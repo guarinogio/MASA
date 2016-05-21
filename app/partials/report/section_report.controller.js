@@ -6,10 +6,11 @@
         .controller('SectionReportCtrl', SectionReportCtrl)
 
     SectionReportCtrl.$inject = 
-    ['$scope', '$rootScope', '$state', 'professors', '$modal', 'profesorSeleccionado', 'selectedCourse', 'selectedSection'];
-    function SectionReportCtrl($scope, $rootScope, $state, professors, $modal, profesorSeleccionado, selectedCourse, selectedSection) {
+    ['$scope', '$state', 'professors', '$modal', 'profesorSeleccionado', 'selectedCourse', 'selectedSection', 'authentication'];
+    function SectionReportCtrl($scope, $state, professors, $modal, profesorSeleccionado, selectedCourse, selectedSection, authentication) {
         var vm = this;
-        var professorid = $rootScope.professorId;
+        var user = authentication.currentUser();
+        var professorid = user._id;
         vm.section = [];
         vm.professor = null;
 

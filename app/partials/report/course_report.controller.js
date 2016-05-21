@@ -6,10 +6,11 @@
         .controller('CourseReportCtrl', CourseReportCtrl)
 
     CourseReportCtrl.$inject = 
-    ['$scope', '$rootScope', '$state', 'professors', '$modal', 'profesorSeleccionado', 'selectedCourse'];
-    function CourseReportCtrl($scope, $rootScope, $state, professors, $modal, profesorSeleccionado, selectedCourse) {
+    ['$scope', '$state', 'professors', '$modal', 'profesorSeleccionado', 'selectedCourse', 'authentication'];
+    function CourseReportCtrl($scope, $state, professors, $modal, profesorSeleccionado, selectedCourse, authentication) {
         var vm = this;
-        var professorid = $rootScope.professorId;
+        var user = authentication.currentUser();
+        var professorid = user._id;
 
         professors.get({ id: professorid }, 
             function (successResult){

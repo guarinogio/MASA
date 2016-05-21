@@ -5,15 +5,16 @@
         .module('app.student')
         .controller('StudentCreateCtrl', StudentCreateCtrl)
 
-    StudentCreateCtrl.$inject = ['$scope', '$rootScope', '$state', 'professors', '$modal', 'selectedSection', 'selectedCourse'];
-    function StudentCreateCtrl($scope, $rootScope, $state, professors, $modal, selectedSection, selectedCourse){
+    StudentCreateCtrl.$inject = ['$scope', '$state', 'professors', '$modal', 'selectedSection', 'selectedCourse', 'authentication'];
+    function StudentCreateCtrl($scope, $state, professors, $modal, selectedSection, selectedCourse, authentication){
         
         var vm = this;
         var duplicated = false;
-        var professorid = $rootScope.professorId;
+        var user = authentication.currentUser();
+        var professorid = user._id;
         vm.professor = {};
-        $rootScope.mensaje = "";
-        $rootScope.actOk = false;
+        vm.mensaje = "";
+        vm.actOk = false;
 
         professors.get({ id: professorid }, 
             function (successResult){
@@ -25,7 +26,6 @@
         });
 
         vm.submit = function() {
-
             if (vm.data_input_form.$valid){
                 var person = {
                     "id": vm.estudiante.Cedula,
@@ -34,18 +34,11 @@
                     "email": vm.estudiante.Correo
                 };
 
-                $rootScope.crearEstudianteLoading = true;
-                $rootScope.botonOk = false;
+                vm.botonOk = false;
                 $scope.modalInstance = $modal.open({
-                    animation: $rootScope.animationsEnabled,
                     templateUrl: 'partials/students/modal/create_students_modal.html',
                     scope: $scope,
-                    size: 'sm',
-                    resolve: {
-                        items: function () {
-                            return $rootScope.items;
-                        }
-                    }
+                    size: 'sm'
                 });
 
                 angular.forEach (vm.professor.courses[selectedCourse.index].sections[selectedSection.index].students, 
@@ -57,24 +50,18 @@
 
                     professors.update({ id: professorid }, vm.professor,
                         function(){
-                            $rootScope.botonOk = true;
-                            $rootScope.urlLo = 'actualizarMatricula';
-                            $rootScope.mensaje = "Estudiante " + vm.estudiante.Apellido + ", " + vm.estudiante.Nombre + " agregado";
-                            $rootScope.crearEstudianteLoading = false;
+                            vm.botonOk = true;
+                            vm.mensaje = "Estudiante " + vm.estudiante.Apellido + ", " + vm.estudiante.Nombre + " agregado";
                         },
 
                         function(){
-                            $rootScope.botonOk = true;
-                            $rootScope.mensaje = "Error al agregar al estudiante " + vm.estudiante.Apellido + ", " + vm.estudiante.Nombre;
-                            $rootScope.crearEstudianteLoading = false;
+                            vm.botonOk = true;
+                            vm.mensaje = "Error al agregar al estudiante " + vm.estudiante.Apellido + ", " + vm.estudiante.Nombre;
                         });
                 } else {
-                    $rootScope.botonOk = true;
-                    $rootScope.mensaje = "Estudiante con cedula " + vm.estudiante.Cedula + " ya esta en la lista.";
-                    $rootScope.crearEstudianteLoading = false;
+                    vm.botonOk = true;
+                    vm.mensaje = "Estudiante con cedula " + vm.estudiante.Cedula + " ya esta en la lista.";
                 }
-            }else{
-                vm.submitted = true;
             }
         }
 
@@ -87,17 +74,8 @@
             $scope.modalInstance.dismiss('cancel');
         };
 
-        $rootScope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $rootScope.opened = true;
-        };
-
         vm.back = function () {
             $state.go('SectionUpdate');
         };  
-
-        return vm;
     };
 })();

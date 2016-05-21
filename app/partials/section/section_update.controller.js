@@ -5,9 +5,10 @@
         .module('app.section')
         .controller('SectionUpdateCtrl', SectionUpdateCtrl)    
 
-    SectionUpdateCtrl.$inject = ['$scope', '$rootScope', '$state', 'professors', '$modal', 'selectedSection', 'selectedCourse','data'];
-    function SectionUpdateCtrl($scope, $rootScope, $state, professors, $modal, selectedSection, selectedCourse, data){
-        var professorid = $rootScope.professorId;
+    SectionUpdateCtrl.$inject = ['$scope', '$state', 'professors', '$modal', 'selectedSection', 'selectedCourse','data', 'authentication'];
+    function SectionUpdateCtrl($scope, $state, professors, $modal, selectedSection, selectedCourse, data, authentication){
+        var user = authentication.currentUser();
+        var professorid = user._id;
         var vm = this;
         vm.section = {};
         vm.students = [];
@@ -39,22 +40,15 @@
         };
 
         vm.freeBTAddressModal = function (index) {
-            $rootScope.index = index;
-            $rootScope.botonOk = true;
-            $rootScope.otroBotonOk = false;
-            $rootScope.botonCancelar = true;
-            $rootScope.eliminarLoading = false;
-            $rootScope.mensaje = "¿Desea liberar la dirección de BT del estudiante "+ vm.students[index].lastname +", "+ vm.students[index].name + "?";
+            $scope.index = index;
+            vm.botonOk = true;
+            vm.otroBotonOk = false;
+            vm.botonCancelar = true;
+            vm.mensaje = "¿Desea liberar la dirección de BT del estudiante "+ vm.students[index].lastname +", "+ vm.students[index].name + "?";
             $scope.modalInstance = $modal.open({
-                animation: $rootScope.animationsEnabled,
                 templateUrl: 'partials/section/modal/student_bt_removal_modal.html',
                 scope: $scope,
-                size: 'sm',
-                resolve: {
-                    items: function () {
-                        return "";
-                    }
-                }
+                size: 'sm'
             });
         };
 
@@ -66,36 +60,30 @@
 
                 professors.update({ id: professorid }, vm.professor,
                     function(){
-                        $rootScope.botonOk = false;
-                        $rootScope.otroBotonOk = true;
-                        $rootScope.botonCancelar = false;
-                        $rootScope.mensaje = "Dirección BT de " + vm.student.lastname + ", " + vm.student.name + " fue liberada";
+                        vm.botonOk = false;
+                        vm.otroBotonOk = true;
+                        vm.botonCancelar = false;
+                        vm.mensaje = "Dirección BT de " + vm.student.lastname + ", " + vm.student.name + " fue liberada";
                     },
                     function(){
-                        $rootScope.botonOk = false;
-                        $rootScope.otroBotonOk = true;
-                        $rootScope.botonCancelar = false;
-                        $rootScope.mensaje = "Error al liberar dirección de BT del estudiante " + vm.estudiante.Apellido + ", " + vm.estudiante.Nombre;
+                        vm.botonOk = false;
+                        vm.otroBotonOk = true;
+                        vm.botonCancelar = false;
+                        vm.mensaje = "Error al liberar dirección de BT del estudiante " + vm.estudiante.Apellido + ", " + vm.estudiante.Nombre;
                 });
         };
 
         vm.retirarEstudianteModal = function (index) {
-            $rootScope.index = index;
-            $rootScope.botonOk = true;
-            $rootScope.otroBotonOk = false;
-            $rootScope.botonCancelar = true;
-            $rootScope.eliminarLoading = false;
-            $rootScope.mensaje = "¿Desea retirar al estudiante "+ vm.students[index].lastname +", "+ vm.students[index].name + "?";
+            $scope.index = index;
+            vm.botonOk = true;
+            vm.otroBotonOk = false;
+            vm.botonCancelar = true;
+            vm.eliminarLoading = false;
+            vm.mensaje = "¿Desea retirar al estudiante "+ vm.students[index].lastname +", "+ vm.students[index].name + "?";
             $scope.modalInstance = $modal.open({
-                animation: $rootScope.animationsEnabled,
                 templateUrl: 'partials/section/modal/update_section_modal.html',
                 scope: $scope,
-                size: 'sm',
-                resolve: {
-                    items: function () {
-                        return "";
-                    }
-                }
+                size: 'sm'
             });
         };
 
@@ -104,16 +92,16 @@
 
             professors.update({ id: professorid }, vm.professor,
             function (){
-                $rootScope.botonOk = false;
-                $rootScope.otroBotonOk = true;
-                $rootScope.botonCancelar = false;
-                $rootScope.mensaje = "Sección "+ vm.section.name +" actualizada";
+                vm.botonOk = false;
+                vm.otroBotonOk = true;
+                vm.botonCancelar = false;
+                vm.mensaje = "Sección "+ vm.section.name +" actualizada";
             },
             function (){
-                $rootScope.botonOk = false;
-                $rootScope.otroBotonOk = true;
-                $rootScope.botonCancelar = false;
-                $rootScope.mensaje = "Error al actualizar la Sección "+ vm.section.name;
+                vm.botonOk = false;
+                vm.otroBotonOk = true;
+                vm.botonCancelar = false;
+                vm.mensaje = "Error al actualizar la Sección "+ vm.section.name;
             });
         };
 

@@ -4,10 +4,14 @@
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li ng-repeat="item in items" ng-click="showChilds(item)">
+                        <li ng-repeat="item in items" 
+                        ng-click="showChilds($index)">
                             <a>{{item.text}}</a>
                             <ul class="nav nav-sidebar text-center">
-                                <li ng-repeat="subItem in item.subItems" ng-show="item.active">
+                                <li ng-repeat="subItem in item.subItems" 
+                                ng-show="item.active"
+                                ng-click="showChilds($index)"
+                                ui-sref-active="active">
                                     <a data-ui-sref="{{ subItem.state ? subItem.state : false }}">{{subItem.text}}
                                 </li>
                             </ul>

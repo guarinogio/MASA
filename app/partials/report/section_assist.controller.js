@@ -6,10 +6,11 @@
         .controller('SectionAssistCtrl', SectionAssistCtrl)
 
     SectionAssistCtrl.$inject = 
-    ['$scope', '$rootScope','$state', 'professors', '$modal', 'selectedCourse', 'selectedSection', 'selectedStudent'];
-    function SectionAssistCtrl($scope, $rootScope, $state, professors, $modal, selectedCourse, selectedSection, selectedStudent) {
+    ['$scope', '$state', 'professors', '$modal', 'selectedCourse', 'selectedSection', 'selectedStudent', 'authentication'];
+    function SectionAssistCtrl($scope, $state, professors, $modal, selectedCourse, selectedSection, selectedStudent, authentication) {
         var vm = this;
-        var professorid = $rootScope.professorId;
+        var user = authentication.currentUser();
+        var professorid = user._id;
         vm.section = [];
         vm.lectures = 0;
         vm.percentage = 0;

@@ -12,31 +12,21 @@
             <tr>
                 <th width="10%" style="text-align: center">
                     Cedula
-                    <span ng-show="sortType == 'id' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'id' && sortReverse" class="fa fa-caret-up"></span>
                 </th>
                 <th width="20%" style="text-align: center">
                     Nombre
-                    <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
                 </th>
                 <th width="20%" style="text-align: center">
                     Apellido
-                    <span ng-show="sortType == 'lastname' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'lastname' && sortReverse" class="fa fa-caret-up"></span>
                 </th>
                 <th width="20%" style="text-align: center">
                     Correo
-                    <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
                 </th>
                 <th width="10%" style="text-align: center">
                     Actualizar Correo
                 </th>
                 <th width="10%" style="text-align: center">
                     Dirección BT
-                    <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
                 </th>
                 <th width="10%" style="text-align: center">
                     Liberar Dirección BT
@@ -53,20 +43,23 @@
                 <td style="vertical-align:middle">{{ student.lastname }}</td>
                 <td style="vertical-align:middle">{{ student.email }}</td>
                 <td style="text-align: center">
-                    <span class="glyphicon glyphicon-envelope" 
+                    <span title="Haga click para actualizar dirección de correo del estudiante"
+                    class="glyphicon glyphicon-envelope" 
                     aria-hidden="true"
                     ng-click="vm.mailUpdate($index)" 
                     style="cursor:pointer;"></span>
                 </td>
                 <td style="vertical-align:middle">{{ student.btaddress }}</td>
                 <td style="text-align: center">
-                    <span class="glyphicon glyphicon-signal" 
+                    <span title="Haga click para liberar la dirección MAC del telefono del estudiante"
+                    class="glyphicon glyphicon-signal" 
                     aria-hidden="true"
                     ng-click="vm.freeBTAddressModal($index)" 
                     style="cursor:pointer;"></span>
                 </td>         
                 <td style="text-align: center">
-                    <span class="glyphicon glyphicon-remove" 
+                    <span title="Haga click para retirar al estudiante de la sección"
+                    class="glyphicon glyphicon-remove" 
                     aria-hidden="true"
                     ng-click="vm.retirarEstudianteModal($index)" 
                     style="cursor:pointer;"></span>

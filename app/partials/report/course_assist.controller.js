@@ -6,10 +6,11 @@
         .controller('CourseAssistCtrl', CourseAssistCtrl)
 
     CourseAssistCtrl.$inject = 
-    ['$scope', '$rootScope', '$state', 'professors', '$modal', 'selectedCourse'];
-    function CourseAssistCtrl($scope, $rootScope, $state, professors, $modal, selectedCourse) {
+    ['$scope', '$state', 'professors', '$modal', 'selectedCourse', 'authentication'];
+    function CourseAssistCtrl($scope, $state, professors, $modal, selectedCourse, authentication) {
         var vm = this;
-        var professorid = $rootScope.professorId;
+        var user = authentication.currentUser();
+        var professorid = user._id;
         vm.course = null;
         vm.lectures = 0;
         vm.percentage = 0;

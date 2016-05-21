@@ -15,43 +15,28 @@
     getRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];
     function getRoutes($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise('/CourseList');
-
         $stateProvider
            .state('CourseList', {
+                parent: 'index',
                 url: '/CourseList',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/course/course_list.html',
                         controller: 'CourseListCtrl',
                         controllerAs: "vm"
                     }
                 }
             })
-            
             .state('CourseCreate', {
+                parent:'index',
                 url: '/CourseCreate',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/course/course_create.html',
                         controller: 'CourseCreateCtrl',
                         controllerAs: "vm"
                     }
                 }
             })
-            
     };
 })();

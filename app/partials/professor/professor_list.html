@@ -7,18 +7,12 @@
             <tr>
                 <th width="20%">
                     Cedula
-                    <span ng-show="sortType == 'Cedula' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'Cedula' && sortReverse" class="fa fa-caret-up"></span>
                 </th>
                 <th width="20%">
                     Nombre
-                    <span ng-show="sortType == 'Nombre' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'Nombre' && sortReverse" class="fa fa-caret-up"></span>
                 </th>
                 <th width="20%">
                     Apellido
-                    <span ng-show="sortType == 'Apellido' && !sortReverse" class="fa fa-caret-down"></span>
-                    <span ng-show="sortType == 'Apellido' && sortReverse" class="fa fa-caret-up"></span>
                 </th>
                 <th width="20%" style="text-align: center">
                     Modificar
@@ -34,10 +28,18 @@
                 <td style="vertical-align:middle">{{ profesor.Nombre }}</td>
                 <td style="vertical-align:middle">{{ profesor.Apellido }}</td>
                 <td style="text-align: center">
-                    <span title="Click aqui para Modificar un Profesor"  class="glyphicon glyphicon-edit" aria-hidden="true"  ng-click="vm.modificarProfesor($index)" style="cursor:pointer"></span>
+                    <span title="Haga click para Modificar un Profesor"  
+                    class="glyphicon glyphicon-edit" 
+                    aria-hidden="true"  
+                    ng-click="vm.modificarProfesor($index)" 
+                    style="cursor:pointer"></span>
                 </td>
                 <td style="text-align: center">
-                    <span title="Click aqui para Eliminar un Profesor" class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="vm.eliminarProfesorModal($index)" style="cursor:pointer"></span>
+                    <span title="Haga click para Eliminar un Profesor" 
+                    class="glyphicon glyphicon-remove" 
+                    aria-hidden="true" 
+                    ng-click="vm.eliminarProfesorModal($index)" 
+                    style="cursor:pointer"></span>
                 </td>
             </tr>
             </tbody>

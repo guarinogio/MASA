@@ -17,54 +17,33 @@
         $urlRouterProvider.otherwise('/SectionList');
 
         $stateProvider
-
             .state('SectionList', {
+                parent: 'index',
                 url: '/SectionList',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/section/section_list.html',
                         controller: 'SectionListCtrl',
                         controllerAs: 'vm'
                     }
                 }
             })
-
             .state('SectionCreate', {
+                parent: 'index',
                 url: '/SectionCreate',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/section/section_create.html',
                         controller: 'SectionCreateCtrl',
                         controllerAs: 'vm'
                     }
                 }
             })
-
-             .state('SectionUpdate', {
+            .state('SectionUpdate', {
+                parent: 'index',
                 url: '/SectionUpdate',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/section/section_update.html',
                         controller: 'SectionUpdateCtrl',
                         controllerAs: 'vm'

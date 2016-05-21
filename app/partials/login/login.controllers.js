@@ -5,69 +5,49 @@
         .module('app.login')
         .controller('loginCtrl', loginCtrl)
 
-    loginCtrl.$inject = ['$rootScope', '$scope', '$state'];
-    function loginCtrl($rootScope, $scope, $state){
+    loginCtrl.$inject = ['$scope', '$state', 'login', 'authentication', '$modal'];
+    function loginCtrl($scope, $state, login, authentication, $modal){
         var vm = this;
-        vm.user;
+        vm.credentials = {};
         
         vm.submit = function() {
             if (vm.data_input_form.$valid){
-                vm.pkg = {         
-                    "Nickname": vm.user.nickname,
-                    "Password": vm.user.password                         
+                var professor = {         
+                    "id": vm.user.nickname,
+                    "password": vm.user.password                         
                 }; 
 
-                /*$rootScope.mensaje = "";
-                $rootScope.bcancel = false;
-                $scope.modalInstance = $modal.open({
-                    animation: $rootScope.animationsEnabled,
-                    templateUrl: 'LoginModal.html',
-                    scope: $scope,
-                    size: 'sm',
-                    resolve: {
-                        items: function () {
-                            return $rootScope.items;
-                        }
-                    }
-                });
-                
-                Login.save(vm.pkg, 
-                    function(data){ 
-                      if(data.Data._value != null){
-                            $rootScope.actOk = true;
-                            $rootScope.urlLo = 'listarProfesor';
-                            $rootScope.bcancel = false;
-                            
-                        }else{
-                            $rootScope.bcancel = true;
-                            $rootScope.mensaje = data.Data._error;
-                        }
-                     },
-                     function(data){
-                         verificar = data.Data; 
-                            if(verificar){
-                                alert("no existe el usuario");
-                            }
-                })
-                GetRol.get({id:vm.user.Nickname}, 
+                login.save(professor,
                     function(data){
-                        $rootScope.role = data.Data;
-                    },
-                    function(){
+                        authentication.saveToken(data.token);
+                        var permission = authentication.currentUser();
+                        if(permission.role=='admin'){
+                            $state.go('ProfessorList');
+                        };
+                        if(permission.role=='professor'){
+                            $state.go('CourseList');
+                        };
                         
-                });*/
-            $state.go('CourseList');
+                    },
+                    function(data){
+                        vm.message = 'Usuario/Clave incorrecto. Por favor intente de nuevo.'
+                        vm.botonOk = true;
+                        $scope.modalInstance = $modal.open({
+                            templateUrl: 
+                            '/partials/login/modal/login_modal.html',
+                            scope: $scope,
+                            size: 'sm',
+                            resolve: {
+                                items: function () {
+                                }
+                            }
+                        });
+                    });
             }
         };
 
-        /*$rootScope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            $rootScope.opened = true;
-        };*/
-
-        $scope.ok = function (urlLo) {
-            $location.url(urlLo);
+        $scope.ok = function () {
+            $state.reload();
             $scope.modalInstance.dismiss('cancel');
         };
        

@@ -18,16 +18,10 @@
 
         $stateProvider
            .state('courseReport', {
+                parent: 'index',
                 url: '/reportesPorMateria',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/report/course_report.html',
                         controller: 'CourseReportCtrl',
                         controllerAs: 'vm' 
@@ -35,16 +29,10 @@
                 }
             })
            .state('sectionReport', {
+                parent: 'index',
                 url: '/reportesPorSeccion',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/report/section_report.html',
                         controller: 'SectionReportCtrl',
                         controllerAs: 'vm' 
@@ -52,16 +40,10 @@
                 }
             })
             .state('studentReport', {
+                parent: 'index',
                 url: '/reportesPorEstudiante',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/report/student_report.html',
                         controller: 'StudentReportCtrl',
                         controllerAs: 'vm'
@@ -69,16 +51,10 @@
                 }
             })
             .state('studentAssist', {
+                parent: 'index',
                 url: '/asistenciaPorEstudiante',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/report/student_assist.html',
                         controller: 'StudentAssistCtrl',
                         controllerAs: 'vm'
@@ -86,16 +62,10 @@
                 }
             })
             .state('sectionAssist', {
+                parent: 'index',
                 url: '/asistenciaPorSeccion',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/report/section_assist.html',
                         controller: 'SectionAssistCtrl',
                         controllerAs: 'vm'
@@ -103,16 +73,10 @@
                 }
             })
             .state('courseAssist', {
+                parent: 'index',
                 url: '/asistenciaPorMateria',
                 views: {
-                    sidebar: {
-                        templateUrl: 'partials/sidebar/sidebar.html',
-                        controller: 'SidebarCtrl'
-                    },
-                    navbar: {
-                        templateUrl: 'partials/sidebar/navbar.html'
-                    },
-                    content: {
+                    'content@': {
                         templateUrl: 'partials/report/course_assist.html',
                         controller: 'CourseAssistCtrl',
                         controllerAs: 'vm'

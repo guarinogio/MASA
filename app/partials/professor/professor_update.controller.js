@@ -6,13 +6,14 @@
         .controller('ProfessorUpdateCtrl', ProfessorUpdateCtrl)
 
    ProfessorUpdateCtrl.$inject = 
-    ['$scope','$rootScope', '$state', 'professors', '$modal', 'profesorSeleccionado' ];
-    function ProfessorUpdateCtrl ( $scope, $rootScope, $state, professors, $modal, profesorSeleccionado ){
+    ['$scope', '$state', 'professors', '$modal', 'profesorSeleccionado' ];
+    function ProfessorUpdateCtrl ( $scope, $state, professors, $modal, profesorSeleccionado ){
         
         var vm = this;
+        vm.botonOk = false;
+        vm.mensaje = "";
         vm.profesor = profesorSeleccionado;
-        $rootScope.mensaje = "";
-        $rootScope.actOk = false;
+
 
         vm.submit = function() {
 
@@ -26,35 +27,28 @@
                 "password": vm.profesor.Password
             };
 
-            $rootScope.botonOk = false;
             $scope.modalInstance = $modal.open({
-                animation: $rootScope.animationsEnabled,
                 templateUrl: 'partials/professor/modal/update_professor_modal.html',
                 scope: $scope,
                 size: 'sm',
-                resolve: {
-                    items: function () {
-                        return $rootScope.items;
-                    }
-                }
             });
 
             professors.update({ id: vm.profesor._id}, professor, 
                 function(){
-                    $rootScope.botonOk = true;
-                    $rootScope.botonCancelar = false;
-                    $rootScope.mensaje = 
+                    vm.botonOk = true;
+                    vm.botonCancelar = false;
+                    vm.mensaje = 
                     "Profesor " + vm.profesor.Apellido + ", " + vm.profesor.Nombre + " actualizado";
                 },
                 function(){
-                    $rootScope.botonOk = true;
-                    $rootScope.botonCancelar = false;
-                    $rootScope.mensaje = 
+                    vm.botonOk = true;
+                    vm.botonCancelar = false;
+                    vm.mensaje = 
                     "Error al modificar al profesor " + vm.profesor.Apellido + ", " + vm.profesor.Nombre;
                 });
         }
 
-        $scope.ok = function (urlLo) {
+        $scope.ok = function () {
             $state.go('ProfessorList');
             $scope.modalInstance.dismiss('cancel');
         };

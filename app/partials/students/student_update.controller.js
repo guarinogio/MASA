@@ -5,14 +5,15 @@
         .module('app.student')
         .controller('StudentUpdateCtrl', StudentUpdateCtrl)
 
-    StudentUpdateCtrl.$inject = ['$scope', '$rootScope', '$state', 'professors', '$modal', 'selectedSection', 'selectedCourse', 'data'];
-    function StudentUpdateCtrl($scope, $rootScope, $state, professors, $modal, selectedSection, selectedCourse, data){
+    StudentUpdateCtrl.$inject = ['$scope', '$state', 'professors', '$modal', 'selectedSection', 'selectedCourse', 'data', 'authentication'];
+    function StudentUpdateCtrl($scope, $state, professors, $modal, selectedSection, selectedCourse, data, authentication){
         
         var vm = this;
-        var professorid = $rootScope.professorId;
+        var user = authentication.currentUser();
+        var professorid = user._id;
         vm.professor = {};
-        $rootScope.mensaje = "";
-        $rootScope.actOk = false;
+        vm.mensaje = "";
+        vm.actOk = false;
         vm.newMail = null;
         vm.student = data.Student
 
@@ -36,18 +37,11 @@
 
             if (vm.data_input_form.$valid){
                 vm.student.email = vm.newMail;
-                $rootScope.crearEstudianteLoading = true;
-                $rootScope.botonOk = false;
+                vm.botonOk = false;
                 $scope.modalInstance = $modal.open({
-                    animation: $rootScope.animationsEnabled,
                     templateUrl: 'partials/students/modal/update_students_modal.html',
                     scope: $scope,
-                    size: 'sm',
-                    resolve: {
-                        items: function () {
-                            return $rootScope.items;
-                        }
-                    }
+                    size: 'sm'
                 });
 
                 vm.professor.courses[selectedCourse.index].sections[selectedSection.index].students.splice(data.Index, 1);
@@ -56,12 +50,12 @@
 
                 professors.update({ id: professorid }, vm.professor,
                     function(){
-                        $rootScope.botonOk = true;
-                        $rootScope.mensaje = "Estudiante " + vm.student.lastname + ", " + vm.student.name + " actualizado";
+                        vm.botonOk = true;
+                        vm.mensaje = "Estudiante " + vm.student.lastname + ", " + vm.student.name + " actualizado";
                     },
                     function(){
-                        $rootScope.botonOk = true;
-                        $rootScope.mensaje = "Error al actualizar al estudiante " + vm.estudiante.Apellido + ", " + vm.estudiante.Nombre;
+                        vm.botonOk = true;
+                        vm.mensaje = "Error al actualizar al estudiante " + vm.estudiante.Apellido + ", " + vm.estudiante.Nombre;
                 });
             }
         };
