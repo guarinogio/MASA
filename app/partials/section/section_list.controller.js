@@ -27,7 +27,6 @@
             },
             function (){
                 console.log("Error al obtener los datos.");
-
         });
 
         vm.createSection = function () {
