@@ -37,7 +37,7 @@
                         {
                             state: 'ProfessorCreate',
                             text: 'Nuevo Profesor'
-                      }
+                        }
                     ]
                 }
             ];

@@ -16,6 +16,13 @@
                 <div class="container-fluid">
                     <br>
                     <span>Bienvenido(a)! Profesor(a) {{vm.professor.lastname}}</span>
+                    <button class="btn-primary btn" 
+                            style=" margin: 10px" 
+                            ng-click= "vm.profile()">
+                            <span class="glyphicon glyphicon-user" 
+                                aria-hidden="true"></span> 
+                            Mi Perfil 
+                    </button>
                     <button class="btn-danger btn" 
                             style=" margin: 10px" 
                             ng-click= "vm.logout()">
