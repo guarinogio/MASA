@@ -10,7 +10,7 @@ var crypto = require('crypto');
 var bodyParser = require('body-parser');
 var jwbt = require('jsonwebtoken');
 var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport('smtps://reynaldo.reyes.4@gmail.com:zwvdhyensrwnfipt@smtp.gmail.com');
+var transporter = nodemailer.createTransport('smtps://masa.mailer.daemon@gmail.com:otigcasccfkqadue@smtp.gmail.com');
 var jwt = require('express-jwt');
 var auth = jwt({
   secret: 'MY_SECRET',
@@ -113,6 +113,33 @@ db.once('open', function() {
 
 	app.use(passport.initialize());
 
+	app.put('/reset/:id', auth, function(req, res){
+		Professor.findById(req.params.id, function (err, professor) {
+			if (err)
+	      		res.send(err);
+			professor.setPassword(req.body.password);
+			professor.save(
+			function(err, docs){
+				// setup e-mail data with unicode symbols
+				var mailOptions = {
+				    from: '"MASA Notifier" <masa.mailer.daemon@gmail.com>', // sender address
+				    to: req.body.email, // list of receivers
+				    subject: 'Cambio de Contraseña en aplicación M.A.S.A.',
+				    text: 'Este es un correo automatizado para informarle que sus credenciales han sido modificadas, sus nuevas credenciales son: '+ req.body.id +' / '+ req.body.password,
+				    html: 'Este es un correo automatizado para informarle que sus credenciales han sido modificadas, sus nuevas credenciales son: '+ req.body.id +' / '+ req.body.password
+				};
+				// send mail with defined transport object
+				transporter.sendMail(mailOptions, function(error, info){
+				    if(error) return console.log(error);
+				    console.log('Message sent: ' + info.response);
+				});
+				var token = professor.generateJwt();
+			    res.status(200);
+			    res.json({"token" : token});
+			})
+		});
+	});
+
 	app.get('/professors', auth, function(req, res){
 		console.log('Received GET ALL professors request');
 		Professor.find(function(err, docs){
@@ -150,7 +177,7 @@ db.once('open', function() {
 			function(err, docs){
 				// setup e-mail data with unicode symbols
 				var mailOptions = {
-				    from: '"Rey Reyes" <reynaldo.reyes.4@gmail.com>', // sender address
+				    from: '"MASA Notifier" <masa.mailer.daemon@gmail.com>', // sender address
 				    to: req.body.email, // list of receivers
 				    subject: 'Registro en la aplicación M.A.S.A.',
 				    text: 'Este es un correo automatizado para informarle que ha sido registrado en la aplicación M.A.S.A. sus credenciales son: '+ req.body.id +' / '+ req.body.password,
