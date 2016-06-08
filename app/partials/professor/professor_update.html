@@ -10,15 +10,15 @@
             <div class="row">
                 <div class="col-md-4 column">
                     <label for="cedula">Cedula</label>
-                    <input type="numeric" class="form-control" name="cedula" readonly="readonly" ng-model="vm.profesor.Cedula"/>
+                    <input type="numeric" class="form-control" name="cedula" readonly="readonly" ng-model="vm.profesor.id"/>
                 </div>
                 <div class="col-md-4 column">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" readonly="readonly" ng-model="vm.profesor.Nombre"/>
+                    <input type="text" class="form-control" name="nombre" readonly="readonly" ng-model="vm.profesor.name"/>
                 </div>
                 <div class="col-md-4 column">
                     <label for="apellido">Apellido</label>
-                    <input type="text" class="form-control" name="apellido" readonly="readonly" ng-model="vm.profesor.Apellido"/>
+                    <input type="text" class="form-control" name="apellido" readonly="readonly" ng-model="vm.profesor.lastname"/>
                 </div>
             </div>
             <div class="row clearfix"><div class="col-md-12 column"><br><br>
@@ -27,7 +27,7 @@
                 <div class="col-md-4 column">
                     <label for="email">Dirección de Correo Electronico</label>
                     <input type="email" class="form-control" name="email" 
-                    ng-model="vm.profesor.Correo" 
+                    ng-model="vm.profesor.email" 
                     ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" placeholder="me@example.com"/>
                     <small class="error" 
                     ng-show="vm.data_input_form.correo.$error.pattern">
@@ -36,13 +36,21 @@
                 </div>
                 <div class="col-md-4 column">
                     <label for="telefono">Número de Teléfono</label>
-                    <input type="phone" class="form-control" 
-                    name="telefono" ng-model="vm.profesor.Telefono" 
-                    ng-pattern="/\d{4}-\d{3}-\d{4}/" maxlength="13" 
-                    placeholder="0212-574-1234"/>
-                        <small class="error" ng-show="vm.data_input_form.telefono.$error.pattern">
-                            El formato del Teléfono debe ser: 0212-789-5551.
+                    <input type="telefono" class="form-control" 
+                        name="telefono" ng-model="vm.profesor.number" 
+                        ng-minlength="7" ng-maxlength="13"
+                        placeholder="04241239876"/>
+                        <small class="error" 
+                        ng-show="vm.data_input_form.telefono.$error.minlength">
+                            La longitud del Número de Teléfono es de 7 números mínimo.
                         </small>
+                        <small class="error" 
+                        ng-show="vm.data_input_form.telefono.$error.maxlength">
+                            La longitud del Número de Teléfono es de 13 números máximo.
+                        </small>
+                </div>
+                <div class="col-md-offset-1 col-md-2 column">
+                    <button type="button" class="btn-primary btn" style="margin: 10px" ng-click="vm.newPassword()">Cambiar Contraseña</button>
                 </div>
             </div>
         </div>
@@ -54,7 +62,6 @@
                 <p class="input-group">
                     <span class="input-group-btn">
                         <button type="submit" class="btn-success btn">Modificar Profesor</button>
-                        <button type="button" class="btn-warning btn" style="margin: 10px" ng-click="vm.back()">Regresar</button>
                     </span>
                 </p>
             </div>

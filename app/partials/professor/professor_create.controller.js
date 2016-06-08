@@ -47,6 +47,8 @@
                         vm.mensaje = 
                         "Error al agregar al profesor " + vm.profesor.Apellido + ", " + vm.profesor.Nombre;
                     });
+            }else{
+                vm.submitted = true;
             }
         }
 

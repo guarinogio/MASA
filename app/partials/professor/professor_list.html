@@ -5,13 +5,13 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th width="20%">
+                <th width="20%" style="text-align: center">
                     Cedula
                 </th>
-                <th width="20%">
+                <th width="20%" style="text-align: center">
                     Nombre
                 </th>
-                <th width="20%">
+                <th width="20%" style="text-align: center">
                     Apellido
                 </th>
                 <th width="20%" style="text-align: center">
@@ -24,9 +24,9 @@
             </thead>
             <tbody>
             <tr ng-repeat="profesor in vm.listaProfesor">
-                <td style="vertical-align:middle">{{ profesor.Cedula }}</td>
-                <td style="vertical-align:middle">{{ profesor.Nombre }}</td>
-                <td style="vertical-align:middle">{{ profesor.Apellido }}</td>
+                <td style="vertical-align:middle">{{ profesor.id }}</td>
+                <td style="vertical-align:middle">{{ profesor.name }}</td>
+                <td style="vertical-align:middle">{{ profesor.lastname }}</td>
                 <td style="text-align: center">
                     <span title="Haga click para Modificar un Profesor"  
                     class="glyphicon glyphicon-edit" 

@@ -6,8 +6,8 @@
         .controller('ProfessorListCtrl', ProfessorListCtrl)
 
     ProfessorListCtrl.$inject = 
-    [ '$scope', '$state', 'professors', '$modal', 'profesorSeleccionado' ];
-    function ProfessorListCtrl( $scope, $state, professors, $modal, profesorSeleccionado ){
+    [ '$scope', '$state', 'professors', '$modal', 'profesorSeleccionado','data' ];
+    function ProfessorListCtrl( $scope, $state, professors, $modal, profesorSeleccionado, data ){
         
         var vm = this;
         vm.lista = true;
@@ -15,17 +15,8 @@
         var profesorArray = [];
         professors.query(
             function (successResult){
-               vm.profesor = successResult;
-                angular.forEach(vm.profesor, function (value){
-                    profesorArray.push({
-                        Cedula:value.id,
-                        Nombre:value.name,
-                        Apellido:value.lastname,
-                        Telefono:value.number,
-                        Correo: value.email
-                    });
-                });
-                vm.listaProfesor = profesorArray;
+                vm.professors = successResult;
+                vm.listaProfesor = vm.professors;
                 
             },
             function(){
@@ -53,15 +44,15 @@
             vm.acceptButton = true;
             vm.botonCancelar = false;
 
-            professors.delete({id: vm.profesor[index]._id}, 
+            professors.delete({id: vm.professors[index]._id}, 
                 function () {
                     vm.rsplice = true;
                     vm.mensaje = 
-                    "Profesor " + vm.profesor[index].name + " eliminado";
+                    "Profesor " + vm.professors[index].name + " eliminado";
                 },
                 function () {
                     vm.mensaje = 
-                    "Error eliminando al Profesor " + vm.profesor[index].name;
+                    "Error eliminando al Profesor " + vm.professors[index].name;
                 });
         };
 
@@ -73,12 +64,7 @@
         };
 
         vm.modificarProfesor = function (index) {
-            profesorSeleccionado._id = vm.profesor[index]._id;
-            profesorSeleccionado.Cedula = vm.profesor[index].id;
-            profesorSeleccionado.Nombre = vm.profesor[index].name;
-            profesorSeleccionado.Apellido = vm.profesor[index].lastname;
-            profesorSeleccionado.Telefono = vm.profesor[index].number;
-            profesorSeleccionado.Correo = vm.profesor[index].email;
+            data.professorId = vm.professors[index]._id;
             $state.go('ProfessorUpdate');
         };
 

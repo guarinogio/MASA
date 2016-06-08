@@ -4,6 +4,7 @@
     angular
         .module('app.professor')
         .factory('professors', professors)
+        .factory('passwordReset', passwordReset)
         .value('selectedCourse',{})
         .value('selectedSection',{})
         .value('selectedStudent',{})
@@ -34,6 +35,17 @@
                 query: {
                     method: 'GET',
                     isArray:true,
+                    headers: {
+                        Authorization: 'Bearer '+ authentication.getToken()
+                    }
+                }
+            });
+    };
+    passwordReset.$inject = ['$resource','$rootScope','authentication'];
+    function passwordReset($resource, $rootScope, authentication){
+        return $resource('http://'+$rootScope.domainUrl+'/reset/:id', {}, {
+                update: {
+                    method: 'PUT',
                     headers: {
                         Authorization: 'Bearer '+ authentication.getToken()
                     }

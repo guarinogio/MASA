@@ -66,25 +66,32 @@
                         </div>
                     </div>
                     <div class="col-md-4 column">
-                        <label for="telefono">Número de Teléfono</label>
-                        <input type="telefono" class="form-control" 
-                        name="telefono" ng-model="vm.profesor.Telefono" 
-                        ng-pattern="/\d{13}/" maxlength="13"
-                        placeholder="04241239876"/>
-                        <small class="error" 
-                        ng-show="vm.data_input_form.telefono.$error.pattern">
-                            El Formato del Número de Teléfono es incorrecto.
-                        </small>
-                    </div>
-                    <div class="col-md-4 column">
                         <label for="password">Contraseña *</label>
-                        <input type="password" class="form-control" ng-model="vm.profesor.Password" maxlength="20" required/>
-                        <div class="error" ng-show="vm.submitted && vm.data_input_form.password.$invalid">
-                            <small class="error" ng-show="vm.data_input_form.password.$error.required">
-                                La Contraseña del Profesor es obligatorio.
+                        <input type="password" name="password" class="form-control" ng-model="vm.profesor.Password" maxlength="20" required/>
+                        <div class="error" ng-show="vm.submitted && 
+                        vm.data_input_form.password.$invalid">
+                            <small class="error" 
+                            ng-show="vm.data_input_form.password.$error.required">
+                                La Contraseña del Profesor es obligatoria.
                             </small>
                         </div>
                     </div>
+                    <div class="col-md-4 column">
+                        <label for="telefono">Número de Teléfono</label>
+                        <input type="telefono" class="form-control" 
+                        name="telefono" ng-model="vm.profesor.Telefono" 
+                        ng-minlength="7" ng-maxlength="13"
+                        placeholder="04241239876"/>
+                        <small class="error" 
+                        ng-show="vm.data_input_form.telefono.$error.minlength">
+                            La longitud del Número de Teléfono es de 7 números mínimo.
+                        </small>
+                        <small class="error" 
+                        ng-show="vm.data_input_form.telefono.$error.maxlength">
+                            La longitud del Número de Teléfono es de 13 números máximo.
+                        </small>
+                    </div>
+                    
                 </div>
             </div>
             <label> * Estos campos son obligatorios.</label>
