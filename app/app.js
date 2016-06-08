@@ -8,6 +8,7 @@
         'app.reports',
         'app.section',
         'app.student',
+        'chart.js',
         'ngResource',
         'ui.router'
     ])

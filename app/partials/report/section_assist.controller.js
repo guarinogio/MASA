@@ -33,10 +33,10 @@
                             vm.section = value; 
                         }   
                     });
-
+                vm.lectures = vm.section.students[0].assistance;
                 angular.forEach (vm.section.students,
                     function (value){
-                        vm.lectures = value.assistance;
+                        
                         vm.subTotal = 0;
                         angular.forEach (value.assistanceTotal,
                             function (valued){
