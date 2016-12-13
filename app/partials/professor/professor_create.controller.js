@@ -21,7 +21,7 @@
                     "lastname": vm.profesor.Apellido,
                     "email": vm.profesor.Correo,
                     "number": vm.profesor.Telefono,
-                    "role": "professor",
+                    "role": "admin",
                     "password": vm.profesor.Password
                 };
 

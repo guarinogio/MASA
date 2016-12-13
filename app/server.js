@@ -16,6 +16,7 @@ var auth = jwt({
   secret: 'MY_SECRET',
   userProperty: 'payload'
 });
+mongoose.Promise = require('bluebird');
 
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
@@ -160,7 +161,7 @@ db.once('open', function() {
 
 	app.post('/professors',  function(req, res){
 		console.log('Received ADD professor request');
-		//console.log(req.body);
+		console.log(req.body);
 
 		var professor = new Professor({
 			id: req.body.id,
@@ -175,7 +176,7 @@ db.once('open', function() {
 
 		professor.save(
 			function(err, docs){
-				// setup e-mail data with unicode symbols
+			/*	// setup e-mail data with unicode symbols
 				var mailOptions = {
 				    from: '"MASA Notifier" <masa.mailer.daemon@gmail.com>', // sender address
 				    to: req.body.email, // list of receivers
@@ -183,12 +184,12 @@ db.once('open', function() {
 				    text: 'Este es un correo automatizado para informarle que ha sido registrado en la aplicación M.A.S.A. sus credenciales son: '+ req.body.id +' / '+ req.body.password,
 				    html: 'Este es un correo automatizado para informarle que ha sido registrado en la aplicación <b> M.A.S.A.</b> sus credenciales son: '+ req.body.id +' / '+ req.body.password
 				};
-				// send mail with defined transport object
+				 // send mail with defined transport object
 				transporter.sendMail(mailOptions, function(error, info){
 				    if(error) return console.log(error);
 				    console.log('Message sent: ' + info.response);
-				});
-				var token = professor.generateJwt();
+				});*/
+		        	var token = professor.generateJwt();
 			    res.status(200);
 			    res.json({"token" : token});
 			})
@@ -246,7 +247,8 @@ db.once('open', function() {
 		})(req, res);
 	});
 });
-
+//mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/AttendanceDB');
-app.listen(3000);
+app.listen(3000, '0.0.0.0');
+
 console.log("server running on port 3000");

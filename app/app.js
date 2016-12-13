@@ -44,7 +44,7 @@
     })
 
     .run(function ($rootScope) {
-        $rootScope.domainUrl = 'Localhost:3000';
+       $rootScope.domainUrl = '190.169.74.203:3000';
     });
 
 })();
