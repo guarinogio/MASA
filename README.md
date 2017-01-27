@@ -4,7 +4,7 @@
 
 M.A.S.A is an application used to keep track of student assistance through Bluetooth technology in an Android Enviroment. The web component of this application is built on JavaScript using the MEAN.IO as a fullstack framework.
 * M.A.S.A Version 1.0
-* https://rey_reyes@bitbucket.org/rey_reyes/masa.git
+* git@github.com:miky-kr5/MASA-Mobile.git
 
 ### How do I get set up? ###
 
@@ -18,3 +18,4 @@ M.A.S.A is an application used to keep track of student assistance through Bluet
 ### Who do I talk to? ###
 
 * Reynaldo.Reyes.4@gmail.com
+* miguel.astor@ciens.ucv.ve
